@@ -1,7 +1,13 @@
 ﻿Imports System.Runtime.InteropServices
 
 ''' <summary>
-''' http://mikumikudance.wikia.com/wiki/VMD_file_format
+''' # VMD file format
+''' 
+''' > http://mikumikudance.wikia.com/wiki/VMD_file_format
+''' 
+''' The Vocaloid Motion Data (VMD) file format is the file format used to 
+''' store animations for models used in the MikuMikuDance (Polygon Movie 
+''' Maker) animation program.
 ''' </summary>
 Public Class VMD
 
@@ -37,9 +43,23 @@ Public Class VMD
     ''' <returns></returns>
     Public Property ModelName As String
 
+    ''' <summary>
+    ''' Now we get to the bone keyframe list, which starts with a 4-byte unsigned 
+    ''' int that tells how many keyframes are listed in the file. Note that the 
+    ''' position coordinates are relative to the "bind pose", or the model's default 
+    ''' pose. The position data of the bones in the PMD model are relative to the 
+    ''' world's origin, and the position data here is relative to that. So, for 
+    ''' example, the bind pose of a bone is (1, 2, 3) and the VMD gives (10, 25, 30). 
+    ''' The final world position would be (11, 27, 33). 
+    ''' </summary>
+    ''' <returns></returns>
     Public Property BoneKeyframeList As KeyFrameList(Of Bone)
     Public Property FaceKeyframeList As KeyFrameList(Of Face)
     Public Property CameraKeyframeList As KeyFrameList(Of Camera)
+
+    Public Overrides Function ToString() As String
+        Return ModelName
+    End Function
 
 End Class
 
@@ -72,15 +92,48 @@ End Class
 
 Public Class Bone : Inherits KeyFrame
 
+    ''' <summary>
+    ''' A null-terminated string representing the name of the bone to which the transformation 
+    ''' will be applied.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property BoneName As String
 
+    ''' <summary>
+    ''' X-coordinate of the bone position
+    ''' </summary>
+    ''' <returns></returns>
     Public Property X As Double
+    ''' <summary>
+    ''' Y-coordinate of the bone position
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Y As Double
+    ''' <summary>
+    ''' Z-coordinate of the bone position
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Z As Double
 
+    ''' <summary>
+    ''' X-coordinate of the bone rotation (quaternion)
+    ''' </summary>
+    ''' <returns></returns>
     Public Property rX As Double
+    ''' <summary>
+    ''' Y-coordinate of the bone rotation (quaternion)
+    ''' </summary>
+    ''' <returns></returns>
     Public Property rY As Double
+    ''' <summary>
+    ''' Z-coordinate of the bone rotation (quaternion)
+    ''' </summary>
+    ''' <returns></returns>
     Public Property rZ As Double
+    ''' <summary>
+    ''' W-coordinate of the bone rotation (quaternion)
+    ''' </summary>
+    ''' <returns></returns>
     Public Property rW As Double
 
     ''' <summary>
@@ -88,24 +141,70 @@ Public Class Bone : Inherits KeyFrame
     ''' </summary>
     ''' <returns></returns>
     Public Property Interpolation As Byte()
+
+    Public Overrides Function ToString() As String
+        Return BoneName
+    End Function
 End Class
 
 Public Class Face : Inherits KeyFrame
 
+    ''' <summary>
+    ''' A null-terminated string representing the name 
+    ''' of the face to which the transformation will be 
+    ''' applied.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property FaceName As String
+    ''' <summary>
+    ''' Weight - this value is on a scale of 0.0-1.0. 
+    ''' It is used to scale how much a face morph should 
+    ''' move a vertex based off of the maximum possible 
+    ''' coordinate that it can move by (specified in the 
+    ''' PMD)
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Scale As Double
+
+    Public Overrides Function ToString() As String
+        Return FaceName
+    End Function
 End Class
 
 Public Class Camera : Inherits KeyFrame
 
     Public Property Length As Double
 
+    ''' <summary>
+    ''' X-coordinate of camera position
+    ''' </summary>
+    ''' <returns></returns>
     Public Property X As Double
+    ''' <summary>
+    ''' Y-coordinate of camera position
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Y As Double
+    ''' <summary>
+    ''' Z-coordinate of camera position
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Z As Double
 
+    ''' <summary>
+    ''' X-coordinate of camera rotation
+    ''' </summary>
+    ''' <returns></returns>
     Public Property rX As Double
+    ''' <summary>
+    ''' Y-coordinate of camera rotation
+    ''' </summary>
+    ''' <returns></returns>
     Public Property rY As Double
+    ''' <summary>
+    ''' Z-coordinate of camera rotation
+    ''' </summary>
+    ''' <returns></returns>
     Public Property rZ As Double
 
     ''' <summary>
@@ -120,5 +219,13 @@ Public Class Camera : Inherits KeyFrame
     ''' <returns></returns>
     Public Property Angle As Integer
 
+    ''' <summary>
+    ''' Perspective
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Perspective As Byte
+
+    Public Overrides Function ToString() As String
+        Return $"[{X}, {Y}, {Z}]"
+    End Function
 End Class
