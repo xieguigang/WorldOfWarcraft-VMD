@@ -14,6 +14,9 @@ Public Class SkeletonAndAnimation
     Public Property GlobalSequences As Sequences
     Public Property Animations As Animations
     Public Property AnimationLookups As AnimationLookups
+    Public Property Bones As Bones
+    Public Property BoneLookups As BoneLookups
+    Public Property KeyBoneLookups As KeyBoneLookups
 
 End Class
 
@@ -51,17 +54,35 @@ Public Class Animation
 
 End Class
 
-Public Class AnimationLookup
+Public Class Lookup
     <XmlAttribute>
     Public Property id As Integer
     <XmlText>
     Public Property value As Integer
 End Class
 
-Public Class AnimationLookups : Inherits List(Of AnimationLookup)
+Public Class AnimationLookups : Inherits List(Of Lookup)
 
     <XmlElement("AnimationLookup")>
-    Public Property AnimationLookups As AnimationLookup()
+    Public Property AnimationLookups As Lookup()
+End Class
+
+Public Class Bones : Inherits List(Of Bone)
+
+    <XmlElement("Bone")>
+    Public Property Bones As Bone()
+End Class
+
+Public Class KeyBoneLookups : Inherits List(Of Lookup)
+
+    <XmlElement("KeyBoneLookup")>
+    Public Property KeyBoneLookups As Lookup()
+End Class
+
+Public Class BoneLookups : Inherits List(Of Lookup)
+
+    <XmlElement("BoneLookup")>
+    Public Property BoneLookups As Lookup()
 End Class
 
 Public Class Bone
