@@ -70,6 +70,38 @@ Public Class Bone
     Public Property parent As Integer
     Public Property geoid As Integer
     Public Property unknown As Integer
+    Public Property trans As transform
+    Public Property rot As transform
+    Public Property scale As transform
+    Public Property pivot As Vector
+End Class
+
+Public Class transform
+    Public Property type As Integer
+    Public Property seq As Integer
+    Public Property anims As anims
+End Class
+
+Public Class anims
+
+    <XmlElement("anim")>
+    Public Property anims As anim()
+End Class
+
+Public Class anim : Inherits List(Of anim_data)
+
+    <XmlAttribute>
+    Public Property id As Integer
+    <XmlElement("data")>
+    Public Property data As anim_data()
+
+End Class
+
+Public Class anim_data
+    <XmlAttribute>
+    Public Property time As Integer
+    <XmlText>
+    Public Property pivot As Vector
 End Class
 
 Public Class Vector : Implements IXmlSerializable
