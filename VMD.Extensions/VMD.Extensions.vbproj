@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90379434-C390-440C-AC0C-5E455E6C2675}</ProjectGuid>
+    <ProjectGuid>{AC2E577B-1D0B-4165-9135-EA5569AA278F}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>MikuMikuDance.File.VMD</RootNamespace>
-    <AssemblyName>MikuMikuDance.File.VMD</AssemblyName>
+    <RootNamespace>MikuMikuDance.Extensions.WMV</RootNamespace>
+    <AssemblyName>MikuMikuDance.Extensions.WMV</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>MikuMikuDance.File.VMD.xml</DocumentationFile>
+    <DocumentationFile>MikuMikuDance.Extensions.WMV.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -27,7 +27,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>MikuMikuDance.File.VMD.xml</DocumentationFile>
+    <DocumentationFile>MikuMikuDance.Extensions.WMV.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -63,7 +63,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="VMD.vb" />
+    <Compile Include="WMV2VMDExtensions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -100,6 +100,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VMD\VMD.vbproj">
+      <Project>{90379434-c390-440c-ac0c-5e455e6c2675}</Project>
+      <Name>VMD</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WMV\WMV.vbproj">
+      <Project>{35a5d798-2d99-4f5e-b10a-d8e94a2df153}</Project>
+      <Name>WMV</Name>
+    </ProjectReference>
     <ProjectReference Include="E:\repo\xDoc\Yilia\runtime\sciBASIC#\Data\BinaryData\BinaryData\BinaryData.vbproj">
       <Project>{487d7c92-d05a-4908-bf81-e6baba0bf592}</Project>
       <Name>BinaryData</Name>
