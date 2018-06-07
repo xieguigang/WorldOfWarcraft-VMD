@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("MikuMikuDance VMD")>
-<Assembly: AssemblyDescription("The Vocaloid Motion Data (VMD) file format is the file format used to store animations for models used in the MikuMikuDance (Polygon Movie Maker) animation program.")>
-<Assembly: AssemblyCompany("MikuMikuDance")>
-<Assembly: AssemblyProduct("VMD")>
+<Assembly: AssemblyTitle("ModelInfo.xml")>
+<Assembly: AssemblyDescription("World Of Warcraft Model Viewer ModelInfo.xml")>
+<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyProduct("WMV")>
 <Assembly: AssemblyCopyright("Copyright © evia@lilithaf.me 2018")>
-<Assembly: AssemblyTrademark("MikuMikuDance")>
+<Assembly: AssemblyTrademark("WMV")>
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("ec4ddaa2-3767-41fe-ac50-3ebd73f626f4")>
+<Assembly: Guid("c06ddc7a-961f-43cc-b04f-c22b2a6135f6")>
 
 ' Version information for an assembly consists of the following four values:
 '
