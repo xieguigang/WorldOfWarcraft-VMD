@@ -20,7 +20,7 @@ End Class
 ''' store animations for models used in the MikuMikuDance (Polygon Movie 
 ''' Maker) animation program.
 ''' </summary>
-<XmlType("mikumikudance-VMD", [Namespace]:="http://www.geocities.jp/higuchuu4/")>
+<XmlType("mikumikudance-VMD", [Namespace]:=VMD.MMDOfficial)>
 Public Class VMD
 
     ''' <summary>
@@ -68,6 +68,16 @@ Public Class VMD
     Public Property BoneKeyframeList As KeyFrameList(Of Bone)
     Public Property FaceKeyframeList As KeyFrameList(Of Face)
     Public Property CameraKeyframeList As KeyFrameList(Of Camera)
+
+    <XmlNamespaceDeclarations()>
+    Public xmlns As XmlSerializerNamespaces
+
+    Public Const MMDOfficial$ = "http://www.geocities.jp/higuchuu4/"
+
+    Sub New()
+        xmlns = New XmlSerializerNamespaces
+        xmlns.Add("MMD", MMDOfficial)
+    End Sub
 
     Public Overrides Function ToString() As String
         Return ModelName

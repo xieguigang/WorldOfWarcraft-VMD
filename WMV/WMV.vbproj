@@ -84,7 +84,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Vector.vb" />
     <Compile Include="GeometryAndRendering.vb" />
     <Compile Include="SkeletonAndAnimation.vb" />
     <Compile Include="header.vb" />
@@ -130,5 +129,6 @@
       <Name>47-dotnet_Microsoft.VisualBasic</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\SharedXml\SharedXml.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

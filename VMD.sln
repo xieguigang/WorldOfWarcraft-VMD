@@ -19,7 +19,14 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "test", "test\test.vbproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{1AE0E44D-B058-432D-A00D-AC55F863FDC9}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedXml", "SharedXml\SharedXml.shproj", "{C840C033-DA67-4F97-971D-439629A279FC}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedXml\SharedXml.projitems*{35a5d798-2d99-4f5e-b10a-d8e94a2df153}*SharedItemsImports = 4
+		SharedXml\SharedXml.projitems*{90379434-c390-440c-ac0c-5e455e6c2675}*SharedItemsImports = 4
+		SharedXml\SharedXml.projitems*{c840c033-da67-4f97-971d-439629a279fc}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Biodeep_UNIX_x64|Any CPU = Biodeep_UNIX_x64|Any CPU
 		Biodeep_UNIX_x64|x64 = Biodeep_UNIX_x64|x64
@@ -618,6 +625,7 @@ Global
 		{FECCE1FD-E1D4-49E3-A668-60BB5E7AED99} = {CB458A75-2590-4E29-A577-972D2C4878A0}
 		{487D7C92-D05A-4908-BF81-E6BABA0BF592} = {CB458A75-2590-4E29-A577-972D2C4878A0}
 		{AC2E577B-1D0B-4165-9135-EA5569AA278F} = {1AE0E44D-B058-432D-A00D-AC55F863FDC9}
+		{C840C033-DA67-4F97-971D-439629A279FC} = {1AE0E44D-B058-432D-A00D-AC55F863FDC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6DECEC8-EADE-4027-A8B4-60F678E638D4}
