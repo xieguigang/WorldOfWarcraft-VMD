@@ -100,6 +100,11 @@ Public Class Bone
     Public Property trans As transform
     Public Property rot As transform
     Public Property scale As transform
+
+    ''' <summary>
+    ''' 骨骼节点的坐标
+    ''' </summary>
+    ''' <returns></returns>
     Public Property pivot As Vector
 End Class
 
