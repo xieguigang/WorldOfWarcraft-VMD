@@ -64,7 +64,48 @@ Public Module Reader
     End Function
 
     Public Function Open130Version(path As String) As VMD
-        Throw New NotImplementedException
+        Using file As New BinaryDataReader(path.Open(FileMode.Open, doClear:=False))
+            Dim modelName$
+            Dim magicBytes$ = file.ReadString(format:=BinaryStringFormat.ZeroTerminated)
+
+            If magicBytes <> MikuMikuDanceMagicHeader130 Then
+                Throw New InvalidProgramException("Mismatch program version!")
+            End If
+
+            ' 前30个字节是magic bytes
+            file.Seek(30, SeekOrigin.Begin)
+            ' 后20个字节是模型的名称
+            modelName = file.ReadString(10, Shift_JIS932)
+
+            Return file.vmdReaderInternal(magicBytes, modelName)
+        End Using
+    End Function
+
+    <MethodImpl(MethodImplOptions.AggressiveInlining)>
+    <Extension>
+    Private Function vmdReaderInternal(file As BinaryDataReader, magicBytes$, modelName$) As VMD
+        Return New VMD With {
+            .MagicHeader = magicBytes,
+            .ModelName = modelName,
+            .BoneKeyframeList = New KeyFrameList(Of Bone) With {
+                .Count = file.ReadUInt32,
+                .Keyframes = file _
+                    .populateBones(n:= .Count) _
+                    .ToArray
+            },
+            .FaceKeyframeList = New KeyFrameList(Of Face) With {
+                .Count = file.ReadUInt32,
+                .Keyframes = file _
+                    .populateFaces(n:= .Count) _
+                    .ToArray
+            },
+            .CameraKeyframeList = New KeyFrameList(Of Camera) With {
+                .Count = file.ReadUInt32,
+                .Keyframes = file _
+                    .populateCamera(n:= .Count) _
+                    .ToArray
+            }
+        }
     End Function
 
     Public Function OpenNewerVersion(path As String) As VMD
@@ -81,28 +122,7 @@ Public Module Reader
             ' 后20个字节是模型的名称
             modelName = file.ReadString(20, Shift_JIS932)
 
-            Return New VMD With {
-                .MagicHeader = magicBytes,
-                .ModelName = modelName,
-                .BoneKeyframeList = New KeyFrameList(Of Bone) With {
-                    .Count = file.ReadUInt32,
-                    .Keyframes = file _
-                        .populateBones(n:= .Count) _
-                        .ToArray
-                },
-                .FaceKeyframeList = New KeyFrameList(Of Face) With {
-                    .Count = file.ReadUInt32,
-                    .Keyframes = file _
-                        .populateFaces(n:= .Count) _
-                        .ToArray
-                },
-                .CameraKeyframeList = New KeyFrameList(Of Camera) With {
-                    .Count = file.ReadUInt32,
-                    .Keyframes = file _
-                        .populateCamera(n:= .Count) _
-                        .ToArray
-                }
-            }
+            Return file.vmdReaderInternal(magicBytes, modelName)
         End Using
     End Function
 
