@@ -7,8 +7,13 @@ Public Class Vector : Implements IXmlSerializable
 
     Public Property pivot As Double()
 
+    Sub New()
+    End Sub
+
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
         Dim s = reader.ReadString
+        reader.ReadEndElement()
+
         Dim v = s.GetStackValue("(", ")") _
                  .Split(","c) _
                  .Select(Function(t) Val(Trim(t))) _
@@ -22,7 +27,13 @@ Public Class Vector : Implements IXmlSerializable
     End Sub
 
     Public Function GetSchema() As XMLSchema Implements IXmlSerializable.GetSchema
-        Return Nothing
+        Dim schema As New XmlSchema
+        Dim xmlText As New XmlSchemaAny
+
+        schema.Items.Add(xmlText)
+        schema.Write(Console.Out)
+
+        Return schema
     End Function
 
     <MethodImpl(MethodImplOptions.AggressiveInlining)>

@@ -1,10 +1,20 @@
 ﻿Imports MikuMikuDance.File.VMD
+Imports WMV
 
 Module Module1
 
     Sub Main()
         'Call vmdReaderTest()
-        Call vmdWriteTest()
+        ' Call vmdWriteTest()
+
+        Call loadWMVtest()
+    End Sub
+
+    Sub loadWMVtest()
+        Dim path = "C:\Users\Evia\source\repos\VMD\DATA\ModelInfo.xml"
+        Dim wmv = ModelInfo.Load(path)
+
+        Pause()
     End Sub
 
     Sub vmdReaderTest()
