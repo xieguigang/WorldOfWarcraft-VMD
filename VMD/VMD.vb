@@ -1,4 +1,15 @@
 ﻿Imports System.Xml.Serialization
+Imports Microsoft.VisualBasic.ComponentModel
+
+<XmlType("VMD-xml", [Namespace]:="http://plugins.mmd.lilithaf.me/file/vmd")>
+Public Class Xml : Inherits XmlDataModel
+
+    Public Property VMD As VMD
+
+    Public Overrides Function ToString() As String
+        Return VMD.ToString
+    End Function
+End Class
 
 ''' <summary>
 ''' # VMD file format
