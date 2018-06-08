@@ -2,6 +2,7 @@
 Imports System.Runtime.CompilerServices
 Imports System.Text
 Imports Microsoft.VisualBasic.Data.IO
+Imports Microsoft.VisualBasic.Text
 
 Public Module Reader
 
@@ -88,6 +89,18 @@ Public Module Reader
                     .Keyframes = file _
                         .populateBones(n:= .Count) _
                         .ToArray
+                },
+                .FaceKeyframeList = New KeyFrameList(Of Face) With {
+                    .Count = file.ReadUInt32,
+                    .Keyframes = file _
+                        .populateFaces(n:= .Count) _
+                        .ToArray
+                },
+                .CameraKeyframeList = New KeyFrameList(Of Camera) With {
+                    .Count = file.ReadUInt32,
+                    .Keyframes = file _
+                        .populateCamera(n:= .Count) _
+                        .ToArray
                 }
             }
         End Using
@@ -113,7 +126,7 @@ Public Module Reader
     <Extension>
     Private Iterator Function populateBones(vmd As BinaryDataReader, n%) As IEnumerable(Of Bone)
         For i As Integer = 0 To n - 1
-            Dim boneName$ = vmd.ReadString(15, Shift_JIS932)
+            Dim boneName$ = vmd.ReadString(15, Shift_JIS932)?.Trim(ASCII.NUL)
             Dim index As UInteger = vmd.ReadUInt32
             Dim x! = vmd.ReadSingle
             Dim y! = vmd.ReadSingle
@@ -128,11 +141,62 @@ Public Module Reader
                 .BoneName = boneName,
                 .Index = index,
                 .Interpolation = interpolation,
-                .X = x
+                .X = x,
+                .Y = y,
+                .Z = z,
+                .rX = rx,
+                .rY = ry,
+                .rZ = rz,
+                .rW = rw
             }
         Next
     End Function
 
+    <Extension>
+    Private Iterator Function populateFaces(vmd As BinaryDataReader, n%) As IEnumerable(Of Face)
+        For i As Integer = 0 To n - 1
+            Dim faceName$ = vmd.ReadString(15, Shift_JIS932)?.Trim(ASCII.NUL)
+            Dim index As UInteger = vmd.ReadUInt32
+            Dim weight! = vmd.ReadSingle
+
+            Yield New Face With {
+                .FaceName = faceName,
+                .Index = index,
+                .Scale = weight
+            }
+        Next
+    End Function
+
+    <Extension>
+    Private Iterator Function populateCamera(vmd As BinaryDataReader, n%) As IEnumerable(Of Camera)
+        For i As Integer = 0 To n - 1
+            Dim index As UInteger = vmd.ReadUInt32
+            Dim len! = vmd.ReadSingle
+            Dim x! = vmd.ReadSingle
+            Dim y! = vmd.ReadSingle
+            Dim z! = vmd.ReadSingle
+            Dim rx! = vmd.ReadSingle
+            Dim ry! = vmd.ReadSingle
+            Dim rz! = vmd.ReadSingle
+            Dim interpolation As Byte() = vmd.ReadBytes(24)
+            Dim angle As UInteger = vmd.ReadUInt32
+            Dim perspective_toggle As Byte = vmd.ReadByte
+
+            Yield New Camera With {
+                .Index = index,
+                .Length = len,
+                .X = x,
+                .Y = y,
+                .Z = z,
+                .rX = rx,
+                .rY = ry,
+                .rZ = rz,
+                .Interpolation = interpolation,
+                .Angle = angle,
+                .Perspective = perspective_toggle
+            }
+        Next
+    End Function
 #End Region
 
 End Module

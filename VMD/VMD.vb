@@ -70,7 +70,7 @@ Public Class KeyFrameList(Of T As KeyFrame)
     ''' many keyframes are listed in the file.
     ''' </summary>
     ''' <returns></returns>
-    Public Property Count As Integer
+    Public Property Count As UInteger
 
     Public Property Keyframes As T()
 
@@ -86,7 +86,7 @@ Public MustInherit Class KeyFrame
     ''' with different frame indices.
     ''' </summary>
     ''' <returns></returns>
-    Public Property Index As Integer
+    Public Property Index As UInteger
 
 End Class
 
@@ -217,7 +217,7 @@ Public Class Camera : Inherits KeyFrame
     ''' Camera FOV angle
     ''' </summary>
     ''' <returns></returns>
-    Public Property Angle As Integer
+    Public Property Angle As UInteger
 
     ''' <summary>
     ''' Perspective
