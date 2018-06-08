@@ -108,7 +108,8 @@ Public MustInherit Class KeyFrame
     ''' with different frame indices.
     ''' </summary>
     ''' <returns></returns>
-    Public Property Index As UInteger
+    <XmlAttribute>
+    Public Property index As UInteger
 
 End Class
 
@@ -119,50 +120,31 @@ Public Class Bone : Inherits KeyFrame
     ''' will be applied.
     ''' </summary>
     ''' <returns></returns>
-    Public Property BoneName As String
+    <XmlAttribute>
+    Public Property boneName As String
 
     ''' <summary>
-    ''' X-coordinate of the bone position
+    ''' + X-coordinate of the bone position
+    ''' + Y-coordinate of the bone position
+    ''' + Z-coordinate of the bone position
     ''' </summary>
     ''' <returns></returns>
-    Public Property X As Single
-    ''' <summary>
-    ''' Y-coordinate of the bone position
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property Y As Single
-    ''' <summary>
-    ''' Z-coordinate of the bone position
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property Z As Single
+    Public Property position As Vector
 
     ''' <summary>
     ''' X-coordinate of the bone rotation (quaternion)
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property rX As Single
-    ''' <summary>
     ''' Y-coordinate of the bone rotation (quaternion)
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property rY As Single
-    ''' <summary>
     ''' Z-coordinate of the bone rotation (quaternion)
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property rZ As Single
-    ''' <summary>
     ''' W-coordinate of the bone rotation (quaternion)
     ''' </summary>
     ''' <returns></returns>
-    Public Property rW As Single
+    Public Property rotation As Vector
 
     ''' <summary>
     ''' 64 bytes of frame interpolation data. 
     ''' </summary>
     ''' <returns></returns>
-    Public Property Interpolation As Byte()
+    Public Property interpolation As Byte()
 
     Public Overrides Function ToString() As String
         Return BoneName
@@ -177,6 +159,7 @@ Public Class Face : Inherits KeyFrame
     ''' applied.
     ''' </summary>
     ''' <returns></returns>
+    <XmlAttribute>
     Public Property FaceName As String
     ''' <summary>
     ''' Weight - this value is on a scale of 0.0-1.0. 
@@ -186,6 +169,7 @@ Public Class Face : Inherits KeyFrame
     ''' PMD)
     ''' </summary>
     ''' <returns></returns>
+    <XmlAttribute>
     Public Property Scale As Single
 
     Public Overrides Function ToString() As String

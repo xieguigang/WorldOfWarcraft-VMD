@@ -161,13 +161,12 @@ Public Module Reader
                 .BoneName = boneName,
                 .Index = index,
                 .Interpolation = interpolation,
-                .X = x,
-                .Y = y,
-                .Z = z,
-                .rX = rx,
-                .rY = ry,
-                .rZ = rz,
-                .rW = rw
+                .position = New Vector With {
+                    .pivot = {x, y, z}
+                },
+                .rotation = New Vector With {
+                    .pivot = {rx, ry, rz, rw}
+                }
             }
         Next
     End Function
