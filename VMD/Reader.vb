@@ -2,6 +2,7 @@
 Imports System.Runtime.CompilerServices
 Imports Microsoft.VisualBasic.Data.IO
 Imports Microsoft.VisualBasic.Text
+Imports MikuMikuDance.File.VMD.Model
 
 Public Module Reader
 
@@ -12,7 +13,7 @@ Public Module Reader
     ''' <param name="version"></param>
     ''' <returns></returns>
     <MethodImpl(MethodImplOptions.AggressiveInlining)>
-    Public Function Open(vmd$, Optional version As Versions = Versions.MikuMikuDanceNewer) As VMD
+    Public Function Open(vmd$, Optional version As Versions = Versions.MikuMikuDanceNewer) As VMDFile
         If version = Versions.MikuMikuDance130 Then
             Return Open130Version(path:=vmd)
         Else
@@ -25,7 +26,7 @@ Public Module Reader
     ''' </summary>
     ''' <param name="vmd"></param>
     ''' <returns></returns>
-    Public Function OpenAuto(vmd As String) As VMD
+    Public Function OpenAuto(vmd As String) As VMDFile
         Dim file As New BinaryDataReader(New FileStream(vmd, FileMode.Open))
         Dim magic$ = file.ReadString(format:=BinaryStringFormat.ZeroTerminated)
 
@@ -41,7 +42,7 @@ Public Module Reader
         End If
     End Function
 
-    Public Function Open130Version(path As String) As VMD
+    Public Function Open130Version(path As String) As VMDFile
         Using file As New BinaryDataReader(path.Open(FileMode.Open, doClear:=False))
             Dim modelName$
             Dim magicBytes$ = file.ReadString(format:=BinaryStringFormat.ZeroTerminated)
@@ -61,8 +62,8 @@ Public Module Reader
 
     <MethodImpl(MethodImplOptions.AggressiveInlining)>
     <Extension>
-    Private Function vmdReaderInternal(file As BinaryDataReader, magicBytes$, modelName$) As VMD
-        Return New VMD With {
+    Private Function vmdReaderInternal(file As BinaryDataReader, magicBytes$, modelName$) As VMDFile
+        Return New VMDFile With {
             .magicHeader = magicBytes,
             .modelName = modelName,
             .boneList = New KeyFrameList(Of bone) With {
@@ -86,7 +87,7 @@ Public Module Reader
         }
     End Function
 
-    Public Function OpenNewerVersion(path As String) As VMD
+    Public Function OpenNewerVersion(path As String) As VMDFile
         Using file As New BinaryDataReader(path.Open(FileMode.Open, doClear:=False))
             Dim modelName$
             Dim magicBytes$ = file.ReadString(format:=BinaryStringFormat.ZeroTerminated)

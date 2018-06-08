@@ -84,10 +84,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\KeyFrames.vb" />
+    <Compile Include="Xml.vb" />
     <Compile Include="Information.vb" />
     <Compile Include="Reader.vb" />
     <Compile Include="Writer.vb" />
-    <Compile Include="VMD.vb" />
+    <Compile Include="Model\VMD.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

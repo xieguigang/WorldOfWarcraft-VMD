@@ -5,6 +5,8 @@ Public Module Information
     Public Const MikuMikuDanceMagicHeader130$ = "Vocaloid Motion Data file"
     Public Const MikuMikuDanceMagicHeaderNew$ = "Vocaloid Motion Data 0002"
 
+    Public Const MMDOfficial$ = "http://www.geocities.jp/higuchuu4/"
+
     ''' <summary>
     ''' MMD之中的日文编码
     ''' </summary>

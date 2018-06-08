@@ -1,10 +1,11 @@
 ﻿Imports System.Runtime.CompilerServices
 Imports Microsoft.VisualBasic.Data.IO
+Imports MikuMikuDance.File.VMD.Model
 
 Public Module Writer
 
     <Extension>
-    Public Function Save(vmd As VMD, path$, Optional version As Versions = Versions.MikuMikuDanceNewer)
+    Public Function Save(vmd As VMDFile, path$, Optional version As Versions = Versions.MikuMikuDanceNewer)
         Dim nameText As New FixLengthString(encoding:=Shift_JIS932)
 
         Using file As New BinaryDataWriter(path.Open())
