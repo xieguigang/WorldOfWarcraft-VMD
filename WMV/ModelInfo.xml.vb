@@ -10,6 +10,8 @@ Imports Microsoft.VisualBasic.Text
 
     Public Property info As info
     Public Property header As header
+    Public Property SkeletonAndAnimation As SkeletonAndAnimation
+    Public Property GeometryAndRendering As GeometryAndRendering
 
     <MethodImpl(MethodImplOptions.AggressiveInlining)>
     Public Shared Function Load(path$, Optional encoding As Encoding = Nothing) As ModelInfo

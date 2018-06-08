@@ -38,13 +38,13 @@ Public Class Animation
     Public Property animName As String
     Public Property length As Integer
     Public Property moveSpeed As Integer
-    Public Property Flags As Integer
+    Public Property flags As Integer
     Public Property probability As Integer
     Public Property d1 As Integer
     Public Property d2 As Integer
     Public Property playSpeed As Integer
-    Public Property boxA As String
-    Public Property boxB As String
+    Public Property boxA As Vector
+    Public Property boxB As Vector
     Public Property rad As Double
     Public Property NextAnimation As Integer
     Public Property Index As Integer
@@ -52,8 +52,17 @@ Public Class Animation
 End Class
 
 Public Class Lookup
+
+    ''' <summary>
+    ''' 仅仅起到排序的作用
+    ''' </summary>
+    ''' <returns></returns>
     <XmlAttribute>
     Public Property id As Integer
+    ''' <summary>
+    ''' 真正所需要的指向资源的指针数据
+    ''' </summary>
+    ''' <returns></returns>
     <XmlText>
     Public Property value As Integer
 End Class

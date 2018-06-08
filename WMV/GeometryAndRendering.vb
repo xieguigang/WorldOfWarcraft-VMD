@@ -2,6 +2,7 @@
 
 Public Class GeometryAndRendering
 
+    Public Property Vertices As Vertices
 End Class
 
 Public Class Vertice
