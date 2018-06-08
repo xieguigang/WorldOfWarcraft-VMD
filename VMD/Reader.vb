@@ -54,11 +54,58 @@ Public Module Reader
     End Function
 
     Public Function Open130Version(path As String) As VMD
-
+        Throw New NotImplementedException
     End Function
 
     Public Function OpenNewerVersion(path As String) As VMD
+        Using file As New BinaryDataReader(path.Open(FileMode.Open, doClear:=False))
+            Dim modelName$
+            Dim magicBytes$ = file.ReadString(format:=BinaryStringFormat.ZeroTerminated)
+
+            If magicBytes <> MikuMikuDanceMagicHeaderNew Then
+                Throw New InvalidProgramException("Mismatch program version!")
+            End If
+
+            ' 前30个字节是magic bytes
+            file.Seek(30, SeekOrigin.Begin)
+            ' 后20个字节是模型的名称
+            modelName = file.ReadString(20)
+
+            Return New VMD With {
+                .MagicHeader = magicBytes,
+                .ModelName = modelName,
+                .BoneKeyframeList = New KeyFrameList(Of Bone) With {
+                    .Count = file.ReadUInt32,
+                    .Keyframes = file _
+                        .populateBones(n:= .Count) _
+                        .ToArray
+                }
+            }
+        End Using
+    End Function
+
+#Region "Common data structure"
+
+    ' part 1. bones
+    ' int(4) list length
+    '
+    ' list element:
+    '
+    ' char(15)
+    ' int(4)
+    ' single(4) x
+    ' single(4) y
+    ' single(4) z
+    ' single(4) rx
+    ' single(4) ry
+    ' single(4) rz
+    ' single(4) rw
+    ' bytes(64)
+    <Extension>
+    Private Iterator Function populateBones(vmd As BinaryDataReader, n%) As IEnumerable(Of Bone)
 
     End Function
+
+#End Region
 
 End Module
