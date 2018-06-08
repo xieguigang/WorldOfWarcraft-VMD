@@ -85,24 +85,24 @@ Public Module Reader
     <Extension>
     Private Function vmdReaderInternal(file As BinaryDataReader, magicBytes$, modelName$) As VMD
         Return New VMD With {
-            .MagicHeader = magicBytes,
-            .ModelName = modelName,
-            .BoneKeyframeList = New KeyFrameList(Of Bone) With {
-                .Count = file.ReadUInt32,
-                .Keyframes = file _
-                    .populateBones(n:= .Count) _
+            .magicHeader = magicBytes,
+            .modelName = modelName,
+            .boneList = New KeyFrameList(Of bone) With {
+                .count = file.ReadUInt32,
+                .keyframes = file _
+                    .populateBones(n:= .count) _
                     .ToArray
             },
-            .FaceKeyframeList = New KeyFrameList(Of Face) With {
-                .Count = file.ReadUInt32,
-                .Keyframes = file _
-                    .populateFaces(n:= .Count) _
+            .faceList = New KeyFrameList(Of face) With {
+                .count = file.ReadUInt32,
+                .keyframes = file _
+                    .populateFaces(n:= .count) _
                     .ToArray
             },
-            .CameraKeyframeList = New KeyFrameList(Of Camera) With {
-                .Count = file.ReadUInt32,
-                .Keyframes = file _
-                    .populateCamera(n:= .Count) _
+            .cameraList = New KeyFrameList(Of Camera) With {
+                .count = file.ReadUInt32,
+                .keyframes = file _
+                    .populateCamera(n:= .count) _
                     .ToArray
             }
         }
@@ -144,7 +144,7 @@ Public Module Reader
     ' single(4) rw
     ' bytes(64)
     <Extension>
-    Private Iterator Function populateBones(vmd As BinaryDataReader, n%) As IEnumerable(Of Bone)
+    Private Iterator Function populateBones(vmd As BinaryDataReader, n%) As IEnumerable(Of bone)
         For i As Integer = 0 To n - 1
             Dim boneName$ = vmd.ReadString(15, Shift_JIS932)?.Trim(ASCII.NUL)
             Dim index As UInteger = vmd.ReadUInt32
@@ -157,10 +157,10 @@ Public Module Reader
             Dim rw! = vmd.ReadSingle
             Dim interpolation As Byte() = vmd.ReadBytes(64)
 
-            Yield New Bone With {
-                .BoneName = boneName,
-                .Index = index,
-                .Interpolation = interpolation,
+            Yield New bone With {
+                .boneName = boneName,
+                .index = index,
+                .interpolation = interpolation,
                 .position = New Vector With {
                     .pivot = {x, y, z}
                 },
@@ -172,16 +172,16 @@ Public Module Reader
     End Function
 
     <Extension>
-    Private Iterator Function populateFaces(vmd As BinaryDataReader, n%) As IEnumerable(Of Face)
+    Private Iterator Function populateFaces(vmd As BinaryDataReader, n%) As IEnumerable(Of face)
         For i As Integer = 0 To n - 1
             Dim faceName$ = vmd.ReadString(15, Shift_JIS932)?.Trim(ASCII.NUL)
             Dim index As UInteger = vmd.ReadUInt32
             Dim weight! = vmd.ReadSingle
 
-            Yield New Face With {
-                .FaceName = faceName,
-                .Index = index,
-                .Scale = weight
+            Yield New face With {
+                .faceName = faceName,
+                .index = index,
+                .scale = weight
             }
         Next
     End Function

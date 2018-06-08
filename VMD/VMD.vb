@@ -37,7 +37,7 @@ Public Class VMD
     '''   
     ''' </summary>
     ''' 
-    Public Property MagicHeader As String
+    Public Property magicHeader As String
 
     ''' <summary>
     ''' Following the magic bytes, there is a fixed-length string which tells 
@@ -53,7 +53,7 @@ Public Class VMD
     ''' registered.
     ''' </summary>
     ''' <returns></returns>
-    Public Property ModelName As String
+    Public Property modelName As String
 
     ''' <summary>
     ''' Now we get to the bone keyframe list, which starts with a 4-byte unsigned 
@@ -65,9 +65,9 @@ Public Class VMD
     ''' The final world position would be (11, 27, 33). 
     ''' </summary>
     ''' <returns></returns>
-    Public Property BoneKeyframeList As KeyFrameList(Of Bone)
-    Public Property FaceKeyframeList As KeyFrameList(Of Face)
-    Public Property CameraKeyframeList As KeyFrameList(Of Camera)
+    Public Property boneList As KeyFrameList(Of bone)
+    Public Property faceList As KeyFrameList(Of face)
+    Public Property cameraList As KeyFrameList(Of Camera)
 
     <XmlNamespaceDeclarations()>
     Public xmlns As XmlSerializerNamespaces
@@ -76,11 +76,11 @@ Public Class VMD
 
     Sub New()
         xmlns = New XmlSerializerNamespaces
-        xmlns.Add("MMD", MMDOfficial)
+        xmlns.Add("mmd", MMDOfficial)
     End Sub
 
     Public Overrides Function ToString() As String
-        Return ModelName
+        Return modelName
     End Function
 
 End Class
@@ -93,9 +93,13 @@ Public Class KeyFrameList(Of T As KeyFrame)
     ''' </summary>
     ''' <returns></returns>
     <XmlAttribute("size")>
-    Public Property Count As UInteger
-    Public Property Keyframes As T()
+    Public Property count As UInteger
+    <XmlElement>
+    Public Property keyframes As T()
 
+    Public Overrides Function ToString() As String
+        Return $"[{count}] {GetType(T).FullName}"
+    End Function
 End Class
 
 Public MustInherit Class KeyFrame
@@ -113,7 +117,7 @@ Public MustInherit Class KeyFrame
 
 End Class
 
-Public Class Bone : Inherits KeyFrame
+Public Class bone : Inherits KeyFrame
 
     ''' <summary>
     ''' A null-terminated string representing the name of the bone to which the transformation 
@@ -129,6 +133,7 @@ Public Class Bone : Inherits KeyFrame
     ''' + Z-coordinate of the bone position
     ''' </summary>
     ''' <returns></returns>
+    <XmlElement>
     Public Property position As Vector
 
     ''' <summary>
@@ -138,6 +143,7 @@ Public Class Bone : Inherits KeyFrame
     ''' W-coordinate of the bone rotation (quaternion)
     ''' </summary>
     ''' <returns></returns>
+    <XmlElement>
     Public Property rotation As Vector
 
     ''' <summary>
@@ -147,11 +153,11 @@ Public Class Bone : Inherits KeyFrame
     Public Property interpolation As Byte()
 
     Public Overrides Function ToString() As String
-        Return BoneName
+        Return boneName
     End Function
 End Class
 
-Public Class Face : Inherits KeyFrame
+Public Class face : Inherits KeyFrame
 
     ''' <summary>
     ''' A null-terminated string representing the name 
@@ -160,7 +166,7 @@ Public Class Face : Inherits KeyFrame
     ''' </summary>
     ''' <returns></returns>
     <XmlAttribute>
-    Public Property FaceName As String
+    Public Property faceName As String
     ''' <summary>
     ''' Weight - this value is on a scale of 0.0-1.0. 
     ''' It is used to scale how much a face morph should 
@@ -170,10 +176,10 @@ Public Class Face : Inherits KeyFrame
     ''' </summary>
     ''' <returns></returns>
     <XmlAttribute>
-    Public Property Scale As Single
+    Public Property scale As Single
 
     Public Overrides Function ToString() As String
-        Return FaceName
+        Return faceName
     End Function
 End Class
 
