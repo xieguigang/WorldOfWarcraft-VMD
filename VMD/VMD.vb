@@ -1,4 +1,4 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Xml.Serialization
 
 ''' <summary>
 ''' # VMD file format
@@ -9,6 +9,7 @@
 ''' store animations for models used in the MikuMikuDance (Polygon Movie 
 ''' Maker) animation program.
 ''' </summary>
+<XmlType("mikumikudance-VMD", [Namespace]:="http://www.geocities.jp/higuchuu4/")>
 Public Class VMD
 
     ''' <summary>
@@ -70,8 +71,8 @@ Public Class KeyFrameList(Of T As KeyFrame)
     ''' many keyframes are listed in the file.
     ''' </summary>
     ''' <returns></returns>
+    <XmlAttribute("size")>
     Public Property Count As UInteger
-
     Public Property Keyframes As T()
 
 End Class
