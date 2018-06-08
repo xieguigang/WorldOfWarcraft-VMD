@@ -11,8 +11,9 @@ Public Class Vector : Implements IXmlSerializable
     End Sub
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
+
+        reader.MoveToContent()
         Dim s = reader.ReadString
-        reader.ReadEndElement()
 
         Dim v = s.GetStackValue("(", ")") _
                  .Split(","c) _
@@ -27,13 +28,7 @@ Public Class Vector : Implements IXmlSerializable
     End Sub
 
     Public Function GetSchema() As XMLSchema Implements IXmlSerializable.GetSchema
-        Dim schema As New XmlSchema
-        Dim xmlText As New XmlSchemaAny
-
-        schema.Items.Add(xmlText)
-        schema.Write(Console.Out)
-
-        Return schema
+        Return Nothing
     End Function
 
     <MethodImpl(MethodImplOptions.AggressiveInlining)>
