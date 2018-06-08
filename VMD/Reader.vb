@@ -74,7 +74,7 @@ Public Module Reader
 
             ' 前30个字节是magic bytes
             file.Seek(30, SeekOrigin.Begin)
-            ' 后20个字节是模型的名称
+            ' 后10个字节是模型的名称
             modelName = file.ReadString(10, Shift_JIS932)
 
             Return file.vmdReaderInternal(magicBytes, modelName)
@@ -202,14 +202,10 @@ Public Module Reader
             Dim perspective_toggle As Byte = vmd.ReadByte
 
             Yield New Camera With {
-                .Index = index,
+                .index = index,
                 .Length = len,
-                .X = x,
-                .Y = y,
-                .Z = z,
-                .rX = rx,
-                .rY = ry,
-                .rZ = rz,
+                .position = New Vector With {.pivot = {x, y, z}},
+                .rotation = New Vector With {.pivot = {rx, ry, rz}},
                 .Interpolation = interpolation,
                 .Angle = angle,
                 .Perspective = perspective_toggle

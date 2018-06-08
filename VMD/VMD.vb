@@ -179,39 +179,24 @@ End Class
 
 Public Class Camera : Inherits KeyFrame
 
+    <XmlAttribute>
     Public Property Length As Single
 
     ''' <summary>
-    ''' X-coordinate of camera position
+    ''' + X-coordinate of the bone position
+    ''' + Y-coordinate of the bone position
+    ''' + Z-coordinate of the bone position
     ''' </summary>
     ''' <returns></returns>
-    Public Property X As Single
-    ''' <summary>
-    ''' Y-coordinate of camera position
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property Y As Single
-    ''' <summary>
-    ''' Z-coordinate of camera position
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property Z As Single
+    Public Property position As Vector
 
     ''' <summary>
-    ''' X-coordinate of camera rotation
+    ''' X-coordinate of the bone rotation (quaternion)
+    ''' Y-coordinate of the bone rotation (quaternion)
+    ''' Z-coordinate of the bone rotation (quaternion)
     ''' </summary>
     ''' <returns></returns>
-    Public Property rX As Single
-    ''' <summary>
-    ''' Y-coordinate of camera rotation
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property rY As Single
-    ''' <summary>
-    ''' Z-coordinate of camera rotation
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property rZ As Single
+    Public Property rotation As Vector
 
     ''' <summary>
     ''' 24 bytes of interpolation data.
@@ -223,15 +208,19 @@ Public Class Camera : Inherits KeyFrame
     ''' Camera FOV angle
     ''' </summary>
     ''' <returns></returns>
+    ''' 
+    <XmlAttribute>
     Public Property Angle As UInteger
 
     ''' <summary>
     ''' Perspective
     ''' </summary>
     ''' <returns></returns>
+    ''' 
+    <XmlAttribute>
     Public Property Perspective As Byte
 
     Public Overrides Function ToString() As String
-        Return $"[{X}, {Y}, {Z}]"
+        Return position.GetXml
     End Function
 End Class
