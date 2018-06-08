@@ -1,3 +1,3 @@
-﻿Public Module XmlReader
+﻿Public Module m2XmlReader
 
 End Module

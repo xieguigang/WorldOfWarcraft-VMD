@@ -10,15 +10,13 @@ Public Class Vector : Implements IXmlSerializable
     Sub New()
     End Sub
 
-    Public Sub ReadXml(reader As Xml.XmlReader) Implements IXmlSerializable.ReadXml
-
-        reader.MoveToContent()
+    Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
         Dim s = reader.ReadString
-
         Dim v = s.GetStackValue("(", ")") _
                  .Split(","c) _
                  .Select(Function(t) Val(Trim(t))) _
                  .ToArray
+
         pivot = v
     End Sub
 
