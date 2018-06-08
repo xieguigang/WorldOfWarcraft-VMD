@@ -6,6 +6,10 @@ Public Class Xml : Inherits XmlDataModel
 
     Public Property VMD As VMD
 
+    Public Function WriteVMD(path$, Optional version As Versions = Versions.MikuMikuDanceNewer) As Boolean
+        Return VMD.Save(path, version)
+    End Function
+
     Public Overrides Function ToString() As String
         Return VMD.ToString
     End Function
@@ -68,6 +72,18 @@ Public Class VMD
     Public Property boneList As KeyFrameList(Of bone)
     Public Property faceList As KeyFrameList(Of face)
     Public Property cameraList As KeyFrameList(Of camera)
+
+    Public ReadOnly Property Version As Versions
+        Get
+            If magicHeader = Reader.MikuMikuDanceMagicHeader130 Then
+                Return Versions.MikuMikuDance130
+            ElseIf magicHeader = Reader.MikuMikuDanceMagicHeaderNew Then
+                Return Versions.MikuMikuDanceNewer
+            Else
+                Return Versions.Unknown
+            End If
+        End Get
+    End Property
 
     <XmlNamespaceDeclarations()>
     Public xmlns As XmlSerializerNamespaces
