@@ -10,7 +10,7 @@ Public Class Vector : Implements IXmlSerializable
     Sub New()
     End Sub
 
-    Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
+    Public Sub ReadXml(reader As Xml.XmlReader) Implements IXmlSerializable.ReadXml
 
         reader.MoveToContent()
         Dim s = reader.ReadString

@@ -84,10 +84,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeometryAndRendering.vb" />
-    <Compile Include="SkeletonAndAnimation.vb" />
-    <Compile Include="header.vb" />
-    <Compile Include="ModelInfo.xml.vb" />
+    <Compile Include="Model\GeometryAndRendering.vb" />
+    <Compile Include="XmlReader.vb" />
+    <Compile Include="Model\SkeletonAndAnimation.vb" />
+    <Compile Include="Model\header.vb" />
+    <Compile Include="Model\ModelInfo.xml.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
