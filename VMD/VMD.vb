@@ -75,9 +75,9 @@ Public Class VMD
 
     Public ReadOnly Property Version As Versions
         Get
-            If magicHeader = Reader.MikuMikuDanceMagicHeader130 Then
+            If magicHeader = Information.MikuMikuDanceMagicHeader130 Then
                 Return Versions.MikuMikuDance130
-            ElseIf magicHeader = Reader.MikuMikuDanceMagicHeaderNew Then
+            ElseIf magicHeader = Information.MikuMikuDanceMagicHeaderNew Then
                 Return Versions.MikuMikuDanceNewer
             Else
                 Return Versions.Unknown

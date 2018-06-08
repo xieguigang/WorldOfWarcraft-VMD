@@ -3,18 +3,16 @@ Imports Microsoft.VisualBasic.Data.IO
 
 Public Module Writer
 
-#Region "Common data structures"
-
     <Extension>
     Public Function Save(vmd As VMD, path$, Optional version As Versions = Versions.MikuMikuDanceNewer)
         Dim nameText As New FixLengthString(encoding:=Shift_JIS932)
 
         Using file As New BinaryDataWriter(path.Open())
             If version = Versions.MikuMikuDance130 Then
-                Call file.Write(nameText.GetBytes(Reader.MikuMikuDanceMagicHeader130, 30))
+                Call file.Write(nameText.GetBytes(Information.MikuMikuDanceMagicHeader130, 30))
                 Call file.Write(nameText.GetBytes(vmd.modelName, 10))
             ElseIf version = Versions.MikuMikuDanceNewer Then
-                Call file.Write(nameText.GetBytes(Reader.MikuMikuDanceMagicHeaderNew, 30))
+                Call file.Write(nameText.GetBytes(Information.MikuMikuDanceMagicHeaderNew, 30))
                 Call file.Write(nameText.GetBytes(vmd.modelName, 20))
             Else
                 Throw New NotImplementedException
@@ -27,6 +25,8 @@ Public Module Writer
 
         Return True
     End Function
+
+#Region "Common data structures"
 
     <Extension>
     Private Sub writeBones(vmd As BinaryDataWriter, bones As KeyFrameList(Of bone))
