@@ -1,13 +1,46 @@
-﻿Public Class header
+﻿''' <summary>
+''' WOW ``*.m2`` file header
+''' </summary>
+Public Class header
+
     Public Property nameLength As Integer
     Public Property nameOfs As Integer
     Public Property name As String
+
+    ''' <summary>
+    ''' 1: tilt x, 2: tilt y, 4:, 8: add another field in header, 16: ; (no other flags as of 3.1.1);
+    ''' </summary>
+    ''' <returns></returns>
     Public Property GlobalModelFlags As Integer
+    ''' <summary>
+    ''' AnimationRelated
+    ''' </summary>
+    ''' <returns></returns>
     Public Property nGlobalSequences As Integer
+    ''' <summary>
+    ''' A list of timestamps.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property ofsGlobalSequences As Integer
+    ''' <summary>
+    ''' AnimationRelated
+    ''' </summary>
+    ''' <returns></returns>
     Public Property nAnimations As Integer
+    ''' <summary>
+    ''' Information about the animations in the model.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property ofsAnimations As Integer
+    ''' <summary>
+    ''' AnimationRelated
+    ''' </summary>
+    ''' <returns></returns>
     Public Property nAnimationLookup As Integer
+    ''' <summary>
+    ''' Mapping of global IDs to the entries in the Animation sequences block.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property ofsAnimationLookup As Integer
     Public Property nBones As Integer
     Public Property ofsBones As Integer

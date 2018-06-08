@@ -23,25 +23,33 @@ Public Class List(Of T)
     Public Property size As Integer
 End Class
 
-Public Class Animations : Inherits List(Of Animation)
+Public Class Animations : Inherits List(Of ModelAnimation)
 
     <XmlElement("Animation")>
-    Public Property Animations As Animation()
+    Public Property Animations As ModelAnimation()
 End Class
 
-Public Class Animation
+Public Class ModelAnimation
 
     <XmlAttribute>
     Public Property id As Integer
 
+    ''' <summary>
+    ''' AnimationDataDB.ID
+    ''' </summary>
+    ''' <returns></returns>
     Public Property animID As Integer
     Public Property animName As String
     Public Property length As Integer
-    Public Property moveSpeed As Integer
+    Public Property moveSpeed As Double
     Public Property flags As Integer
     Public Property probability As Integer
     Public Property d1 As Integer
     Public Property d2 As Integer
+    ''' <summary>
+    ''' note: this can't be play speed because it's 0 for some models
+    ''' </summary>
+    ''' <returns></returns>
     Public Property playSpeed As Integer
     Public Property boxA As Vector
     Public Property boxB As Vector
@@ -73,10 +81,10 @@ Public Class AnimationLookups : Inherits List(Of Lookup)
     Public Property AnimationLookups As Lookup()
 End Class
 
-Public Class Bones : Inherits List(Of Bone)
+Public Class Bones : Inherits List(Of ModelBoneDef)
 
     <XmlElement("Bone")>
-    Public Property Bones As Bone()
+    Public Property Bones As ModelBoneDef()
 End Class
 
 Public Class KeyBoneLookups : Inherits List(Of Lookup)
@@ -91,15 +99,45 @@ Public Class BoneLookups : Inherits List(Of Lookup)
     Public Property BoneLookups As Lookup()
 End Class
 
-Public Class Bone
+Public Class ModelBoneDef
+
+    ''' <summary>
+    ''' Back-reference to the key bone lookup table. -1 if this is no key bone.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property keyboneid As Integer
     Public Property billboard As Integer
+    ''' <summary>
+    ''' parent bone index
+    ''' </summary>
+    ''' <returns></returns>
     Public Property parent As Integer
+    ''' <summary>
+    ''' A geoset for this bone.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property geoid As Integer
+    ''' <summary>
+    ''' new int added to the bone definitions.  
+    ''' Added in WoW 2.0
+    ''' </summary>
+    ''' <returns></returns>
     Public Property unknown As Integer
-    Public Property trans As transform
-    Public Property rot As transform
-    Public Property scale As transform
+    ''' <summary>
+    ''' (Vec3D)
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property trans As AnimationBlock
+    ''' <summary>
+    ''' (QuatS)
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property rot As AnimationBlock
+    ''' <summary>
+    ''' (Vec3D)
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property scale As AnimationBlock
 
     ''' <summary>
     ''' 骨骼节点的坐标
@@ -108,8 +146,17 @@ Public Class Bone
     Public Property pivot As Vector
 End Class
 
-Public Class transform
+Public Class AnimationBlock
+
+    ''' <summary>
+    ''' interpolation type (0=none, 1=linear, 2=hermite)
+    ''' </summary>
+    ''' <returns></returns>
     Public Property type As Integer
+    ''' <summary>
+    ''' global sequence id or -1
+    ''' </summary>
+    ''' <returns></returns>
     Public Property seq As Integer
     Public Property anims As anims
 End Class
