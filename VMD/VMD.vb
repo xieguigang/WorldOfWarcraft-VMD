@@ -103,38 +103,38 @@ Public Class Bone : Inherits KeyFrame
     ''' X-coordinate of the bone position
     ''' </summary>
     ''' <returns></returns>
-    Public Property X As Double
+    Public Property X As Single
     ''' <summary>
     ''' Y-coordinate of the bone position
     ''' </summary>
     ''' <returns></returns>
-    Public Property Y As Double
+    Public Property Y As Single
     ''' <summary>
     ''' Z-coordinate of the bone position
     ''' </summary>
     ''' <returns></returns>
-    Public Property Z As Double
+    Public Property Z As Single
 
     ''' <summary>
     ''' X-coordinate of the bone rotation (quaternion)
     ''' </summary>
     ''' <returns></returns>
-    Public Property rX As Double
+    Public Property rX As Single
     ''' <summary>
     ''' Y-coordinate of the bone rotation (quaternion)
     ''' </summary>
     ''' <returns></returns>
-    Public Property rY As Double
+    Public Property rY As Single
     ''' <summary>
     ''' Z-coordinate of the bone rotation (quaternion)
     ''' </summary>
     ''' <returns></returns>
-    Public Property rZ As Double
+    Public Property rZ As Single
     ''' <summary>
     ''' W-coordinate of the bone rotation (quaternion)
     ''' </summary>
     ''' <returns></returns>
-    Public Property rW As Double
+    Public Property rW As Single
 
     ''' <summary>
     ''' 64 bytes of frame interpolation data. 
@@ -164,7 +164,7 @@ Public Class Face : Inherits KeyFrame
     ''' PMD)
     ''' </summary>
     ''' <returns></returns>
-    Public Property Scale As Double
+    Public Property Scale As Single
 
     Public Overrides Function ToString() As String
         Return FaceName
@@ -173,39 +173,39 @@ End Class
 
 Public Class Camera : Inherits KeyFrame
 
-    Public Property Length As Double
+    Public Property Length As Single
 
     ''' <summary>
     ''' X-coordinate of camera position
     ''' </summary>
     ''' <returns></returns>
-    Public Property X As Double
+    Public Property X As Single
     ''' <summary>
     ''' Y-coordinate of camera position
     ''' </summary>
     ''' <returns></returns>
-    Public Property Y As Double
+    Public Property Y As Single
     ''' <summary>
     ''' Z-coordinate of camera position
     ''' </summary>
     ''' <returns></returns>
-    Public Property Z As Double
+    Public Property Z As Single
 
     ''' <summary>
     ''' X-coordinate of camera rotation
     ''' </summary>
     ''' <returns></returns>
-    Public Property rX As Double
+    Public Property rX As Single
     ''' <summary>
     ''' Y-coordinate of camera rotation
     ''' </summary>
     ''' <returns></returns>
-    Public Property rY As Double
+    Public Property rY As Single
     ''' <summary>
     ''' Z-coordinate of camera rotation
     ''' </summary>
     ''' <returns></returns>
-    Public Property rZ As Double
+    Public Property rZ As Single
 
     ''' <summary>
     ''' 24 bytes of interpolation data.

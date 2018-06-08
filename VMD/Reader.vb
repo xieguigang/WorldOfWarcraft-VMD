@@ -1,11 +1,17 @@
 ﻿Imports System.IO
 Imports System.Runtime.CompilerServices
+Imports System.Text
 Imports Microsoft.VisualBasic.Data.IO
 
 Public Module Reader
 
     Const MikuMikuDanceMagicHeader130$ = "Vocaloid Motion Data file"
     Const MikuMikuDanceMagicHeaderNew$ = "Vocaloid Motion Data 0002"
+
+    ''' <summary>
+    ''' MMD之中的日文编码
+    ''' </summary>
+    ReadOnly Shift_JIS932 As Encoding = Encoding.GetEncoding("shift_jis")
 
     Public Enum Versions As Integer
         Unknown = 0
@@ -41,8 +47,11 @@ Public Module Reader
     ''' <param name="vmd"></param>
     ''' <returns></returns>
     Public Function OpenAuto(vmd As String) As VMD
-        Dim file As New FileStream(vmd, FileMode.Open)
-        Dim magic$ = New BinaryDataReader(file).ReadString(format:=BinaryStringFormat.ZeroTerminated)
+        Dim file As New BinaryDataReader(New FileStream(vmd, FileMode.Open))
+        Dim magic$ = file.ReadString(format:=BinaryStringFormat.ZeroTerminated)
+
+        Call file.Close()
+        Call file.Dispose()
 
         If magic = MikuMikuDanceMagicHeader130 Then
             Return Open130Version(path:=vmd)
@@ -69,7 +78,7 @@ Public Module Reader
             ' 前30个字节是magic bytes
             file.Seek(30, SeekOrigin.Begin)
             ' 后20个字节是模型的名称
-            modelName = file.ReadString(20)
+            modelName = file.ReadString(20, Shift_JIS932)
 
             Return New VMD With {
                 .MagicHeader = magicBytes,
@@ -103,7 +112,25 @@ Public Module Reader
     ' bytes(64)
     <Extension>
     Private Iterator Function populateBones(vmd As BinaryDataReader, n%) As IEnumerable(Of Bone)
+        For i As Integer = 0 To n - 1
+            Dim boneName$ = vmd.ReadString(15, Shift_JIS932)
+            Dim index As UInteger = vmd.ReadUInt32
+            Dim x! = vmd.ReadSingle
+            Dim y! = vmd.ReadSingle
+            Dim z! = vmd.ReadSingle
+            Dim rx! = vmd.ReadSingle
+            Dim ry! = vmd.ReadSingle
+            Dim rz! = vmd.ReadSingle
+            Dim rw! = vmd.ReadSingle
+            Dim interpolation As Byte() = vmd.ReadBytes(64)
 
+            Yield New Bone With {
+                .BoneName = boneName,
+                .Index = index,
+                .Interpolation = interpolation,
+                .X = x
+            }
+        Next
     End Function
 
 #End Region
