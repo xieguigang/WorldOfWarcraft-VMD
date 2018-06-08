@@ -67,7 +67,7 @@ Public Class VMD
     ''' <returns></returns>
     Public Property boneList As KeyFrameList(Of bone)
     Public Property faceList As KeyFrameList(Of face)
-    Public Property cameraList As KeyFrameList(Of Camera)
+    Public Property cameraList As KeyFrameList(Of camera)
 
     <XmlNamespaceDeclarations()>
     Public xmlns As XmlSerializerNamespaces
@@ -183,10 +183,10 @@ Public Class face : Inherits KeyFrame
     End Function
 End Class
 
-Public Class Camera : Inherits KeyFrame
+Public Class camera : Inherits KeyFrame
 
     <XmlAttribute>
-    Public Property Length As Single
+    Public Property len As Single
 
     ''' <summary>
     ''' + X-coordinate of the bone position
@@ -208,7 +208,7 @@ Public Class Camera : Inherits KeyFrame
     ''' 24 bytes of interpolation data.
     ''' </summary>
     ''' <returns></returns>
-    Public Property Interpolation As Byte()
+    Public Property interpolation As Byte()
 
     ''' <summary>
     ''' Camera FOV angle
@@ -216,7 +216,7 @@ Public Class Camera : Inherits KeyFrame
     ''' <returns></returns>
     ''' 
     <XmlAttribute>
-    Public Property Angle As UInteger
+    Public Property angle As UInteger
 
     ''' <summary>
     ''' Perspective
@@ -224,7 +224,7 @@ Public Class Camera : Inherits KeyFrame
     ''' <returns></returns>
     ''' 
     <XmlAttribute>
-    Public Property Perspective As Byte
+    Public Property perspective As Byte
 
     Public Overrides Function ToString() As String
         Return position.GetXml

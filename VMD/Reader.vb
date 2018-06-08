@@ -6,13 +6,13 @@ Imports Microsoft.VisualBasic.Text
 
 Public Module Reader
 
-    Const MikuMikuDanceMagicHeader130$ = "Vocaloid Motion Data file"
-    Const MikuMikuDanceMagicHeaderNew$ = "Vocaloid Motion Data 0002"
+    Public Const MikuMikuDanceMagicHeader130$ = "Vocaloid Motion Data file"
+    Public Const MikuMikuDanceMagicHeaderNew$ = "Vocaloid Motion Data 0002"
 
     ''' <summary>
     ''' MMD之中的日文编码
     ''' </summary>
-    ReadOnly Shift_JIS932 As Encoding = Encoding.GetEncoding("shift_jis")
+    Friend ReadOnly Shift_JIS932 As Encoding = Encoding.GetEncoding("shift_jis")
 
     Public Enum Versions As Integer
         Unknown = 0
@@ -99,7 +99,7 @@ Public Module Reader
                     .populateFaces(n:= .count) _
                     .ToArray
             },
-            .cameraList = New KeyFrameList(Of Camera) With {
+            .cameraList = New KeyFrameList(Of camera) With {
                 .count = file.ReadUInt32,
                 .keyframes = file _
                     .populateCamera(n:= .count) _
@@ -187,7 +187,7 @@ Public Module Reader
     End Function
 
     <Extension>
-    Private Iterator Function populateCamera(vmd As BinaryDataReader, n%) As IEnumerable(Of Camera)
+    Private Iterator Function populateCamera(vmd As BinaryDataReader, n%) As IEnumerable(Of camera)
         For i As Integer = 0 To n - 1
             Dim index As UInteger = vmd.ReadUInt32
             Dim len! = vmd.ReadSingle
@@ -201,14 +201,14 @@ Public Module Reader
             Dim angle As UInteger = vmd.ReadUInt32
             Dim perspective_toggle As Byte = vmd.ReadByte
 
-            Yield New Camera With {
+            Yield New camera With {
                 .index = index,
-                .Length = len,
+                .len = len,
                 .position = New Vector With {.pivot = {x, y, z}},
                 .rotation = New Vector With {.pivot = {rx, ry, rz}},
-                .Interpolation = interpolation,
-                .Angle = angle,
-                .Perspective = perspective_toggle
+                .interpolation = interpolation,
+                .angle = angle,
+                .perspective = perspective_toggle
             }
         Next
     End Function
