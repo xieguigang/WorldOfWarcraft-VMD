@@ -84,6 +84,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bone.vb" />
+    <Compile Include="Material.vb" />
+    <Compile Include="Texture.vb" />
+    <Compile Include="Surface.vb" />
+    <Compile Include="Vertex.vb" />
     <Compile Include="PMXReader.vb" />
     <Compile Include="PMX.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

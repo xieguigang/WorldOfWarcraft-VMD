@@ -27,7 +27,8 @@ Public Module PMXReader
                         n:= .size,
                         globals:=globals
                     ).ToArray
-                }
+                },
+                .FaceVertex = file.readFaceVertex(globals)
             }
         End Using
     End Function
@@ -75,6 +76,17 @@ Public Module PMXReader
     End Function
 
 #Region "Model Data"
+
+    <Extension>
+    Private Function readFaceVertex(pmx As BinaryDataReader, globals As globals) As Face
+        Dim numbers% = pmx.ReadUInt32
+        Dim index%() = pmx.ReadInt32s(numbers)
+
+        Return New Face With {
+            .size = numbers,
+            .VertexIndex = index
+        }
+    End Function
 
     <Extension>
     Private Iterator Function populateVertex(pmx As BinaryDataReader, n%, globals As globals) As IEnumerable(Of vertex)
