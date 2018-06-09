@@ -106,11 +106,11 @@ Public Module PMXReader
             }
             Dim type As New DeformType With {
                 .type = pmx.ReadByte,
-                .BDEF1 = pmx.readBDEF1(.type, globals.vertexIndexSize),
-                .BDEF2 = pmx.readBDEF2(.type, globals.vertexIndexSize),
-                .BDEF4 = pmx.readBDEF4(.type, globals.vertexIndexSize),
-                .SDEF = pmx.readSDEF(.type, globals.vertexIndexSize),
-                .QDEF = pmx.readQDEF(.type, globals.vertexIndexSize)
+                .BDEF1 = pmx.readBDEF1(.type, globals.boneIndexSize),
+                .BDEF2 = pmx.readBDEF2(.type, globals.boneIndexSize),
+                .BDEF4 = pmx.readBDEF4(.type, globals.boneIndexSize),
+                .SDEF = pmx.readSDEF(.type, globals.boneIndexSize),
+                .QDEF = pmx.readQDEF(.type, globals.boneIndexSize)
             }
 
             Yield New vertex With {

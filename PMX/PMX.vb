@@ -66,7 +66,7 @@ Namespace DeformTypes
         BDEF2 = 1
         BDEF4 = 2
         SDEF = 3
-        QDEF = 8
+        QDEF = 4
     End Enum
 
     Public Structure DeformType
