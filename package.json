@@ -24,8 +24,8 @@
     "distributions": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.2.2",
-    "tap": "^6.3.0"
+    "sciBASIC": "^3.2.2",
+    "dot-net": "^4.7"
   },
   "license": "GPL3"
 }
