@@ -5,6 +5,7 @@ Public Class PMXFile
 
     Public Property header As header
     Public Property modelInfo As modelInfo
+    Public Property vertexData As VertexData
 
     Public Overrides Function ToString() As String
         Return $"[{header}] {modelInfo}"
@@ -30,6 +31,11 @@ Public Class vertex
     Public Property appendixUV As vec4
     Public Property weightDeform As DeformType
     Public Property edgeScale As Single
+End Class
+
+Public Class VertexData
+    Public Property size As Integer
+    Public Property data As vertex()
 End Class
 
 Namespace DeformTypes
