@@ -39,12 +39,14 @@ Public Structure IK
     Dim target As Integer
     Dim loops As Integer
     Dim angle As Single
-    Dim linklist As List(Of Link)
+    Dim linklist As Link()
 End Structure
 
 Public Structure Link
     Dim boneIndex As Integer
     Dim isLimited As Boolean
+
+    Dim low, high As vec3
 End Structure
 
 <Flags> Public Enum BoneFlags As UShort

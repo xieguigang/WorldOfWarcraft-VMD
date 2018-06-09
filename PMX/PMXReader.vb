@@ -166,10 +166,10 @@ Public Module PMXReader
                 extKey = pmx.ReadInt32
             End If
 
-            Dim IK As IK
+            Dim IK As IK = Nothing
 
             If flag.CheckFlag(BoneFlags.IK) Then
-                IK = pmx.readIK
+                IK = pmx.readIK(globals)
             End If
 
             Yield New Bone With {
@@ -190,14 +190,55 @@ Public Module PMXReader
                 .localY = localY,
                 .localZ = localZ,
                 .extKey = extKey,
-                .IK = pmx.readIK
+                .IK = IK
             }
         Next
     End Function
 
     <Extension>
-    Private Function readIK(pmx As BinaryDataReader) As IK
+    Private Function readIK(pmx As BinaryDataReader, globals As globals) As IK
+        Dim target% = pmx.readIndex(globals.boneIndexSize)
+        Dim loops = pmx.ReadInt32
+        Dim angle! = pmx.ReadSingle
 
+        Return New IK With {
+            .angle = angle,
+            .loops = loops,
+            .target = target,
+            .linklist = pmx.readLinks(
+                n:=pmx.ReadInt32,
+                globals:=globals
+            ).ToArray
+        }
+    End Function
+
+    <Extension>
+    Private Iterator Function readLinks(pmx As BinaryDataReader, n%, globals As globals) As IEnumerable(Of Link)
+        For i As Integer = 0 To n - 1
+            Dim boneIndex = pmx.readIndex(globals.boneIndexSize)
+            Dim isLimited = pmx.ReadByte <> 0
+            Dim low, high As vec3
+
+            If isLimited Then
+                low = New vec3 With {
+                    .x = pmx.ReadSingle,
+                    .y = pmx.ReadSingle,
+                    .z = pmx.ReadSingle
+                }
+                high = New vec3 With {
+                    .x = pmx.ReadSingle,
+                    .y = pmx.ReadSingle,
+                    .z = pmx.ReadSingle
+                }
+            End If
+
+            Yield New Link With {
+                .boneIndex = boneIndex,
+                .high = high,
+                .low = low,
+                .isLimited = isLimited
+            }
+        Next
     End Function
 
     <Extension>
