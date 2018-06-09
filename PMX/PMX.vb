@@ -5,6 +5,10 @@ Public Class PMXFile
     Public Property header As header
     Public Property modelInfo As modelInfo
 
+    Public Overrides Function ToString() As String
+        Return $"[{header}] {modelInfo}"
+    End Function
+
 End Class
 
 Public Structure vec2
@@ -29,6 +33,10 @@ Public Class header
     ''' </summary>
     ''' <returns></returns>
     Public Property globals As globals
+
+    Public Overrides Function ToString() As String
+        Return signature.CharString & version.ToString("F1")
+    End Function
 
 End Class
 
@@ -71,8 +79,13 @@ End Class
 ''' as specified by the <see cref="globals.encoding"/> byte in the header.
 ''' </summary>
 Public Class modelInfo
+
     Public Property modelNameJp As String
     Public Property modelNameUniversal As String
     Public Property commentsJp As String
     Public Property commentsUniversal As String
+
+    Public Overrides Function ToString() As String
+        Return modelNameJp
+    End Function
 End Class

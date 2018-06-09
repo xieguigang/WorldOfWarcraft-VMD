@@ -14,7 +14,7 @@ Module Module1
     End Sub
 
     Sub pmxReadertest()
-        Dim pmx = PMXReader.Open("../DATA/vdproject.pmx")
+        Dim pmx As PMXFile = PMXReader.Open("../DATA/vdproject.pmx")
 
         Pause()
     End Sub
