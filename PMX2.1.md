@@ -1,5 +1,7 @@
 # PMX (Polygon Model eXtended) 2.1
 
+> https://gist.github.com/felixjones/f8a06bd48f9da9a4539f
+
 This is an English description of the .PMX file format used in Miku Miku Dance (MMD).
 
 PMX is the successor to the .PMD format (Polygon Model Data).
