@@ -1,4 +1,6 @@
-﻿Public Class Bone
+﻿Imports Microsoft.VisualBasic.Serialization.JSON
+
+Public Class Bone
 
     Public Property name As String
     Public Property enUS As String
@@ -18,7 +20,7 @@
     Public Property IKtype As IKKinds
 
     Public Overrides Function ToString() As String
-        Return name
+        Return $"{name} @ {position}"
     End Function
 
 End Class
@@ -36,10 +38,24 @@ Public Class bones : Inherits ListData(Of Bone)
 End Class
 
 Public Structure IK
+
     Dim target As Integer
     Dim loops As Integer
     Dim angle As Single
     Dim linklist As Link()
+
+    Public Overrides Function ToString() As String
+        If linklist Is Nothing Then
+            Return "null"
+        Else
+            Dim linkTo$ = linklist _
+                .Select(Function(l) l.boneIndex) _
+                .ToArray _
+                .GetJson
+
+            Return $"{target} => {linkTo}"
+        End If
+    End Function
 End Structure
 
 Public Structure Link
