@@ -22,7 +22,7 @@ Public Module PMXReader
                 .header = header,
                 .modelInfo = file.readModelInfo(globals.encoding),
                 .vertexData = New VertexData With {
-                    .size = file.ReadUInt32,
+                    .size = file.ReadInt32,
                     .data = file.populateVertex(
                         n:= .size,
                         globals:=globals
@@ -82,7 +82,12 @@ Public Module PMXReader
             Dim xyz As New vec3 With {
                 .x = pmx.ReadSingle,
                 .y = pmx.ReadSingle,
-                .z = pmx.ReadSingle
+                .z = -pmx.ReadSingle
+            }
+            Dim normal As New vec3 With {
+                .x = pmx.ReadSingle,
+                .y = pmx.ReadSingle,
+                .z = -pmx.ReadSingle
             }
             Dim UV As New vec2 With {
                 .x = pmx.ReadSingle,
@@ -110,6 +115,7 @@ Public Module PMXReader
 
             Yield New vertex With {
                 .position = xyz,
+                .normal = normal,
                 .UVtextureCoordinate = UV,
                 .appendixUV = appendixUV,
                 .weightDeform = type,
@@ -126,9 +132,9 @@ Public Module PMXReader
             Case IndexSize.byte
                 Return pmx.ReadByte
             Case IndexSize.short
-                Return pmx.ReadUInt16
+                Return pmx.ReadInt16
             Case IndexSize.int
-                Return pmx.ReadUInt32
+                Return pmx.ReadInt32
             Case Else
                 Throw New NotImplementedException
         End Select

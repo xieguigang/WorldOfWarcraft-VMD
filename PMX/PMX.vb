@@ -39,15 +39,24 @@ End Structure
 
 Public Class vertex
     Public Property position As vec3
+    Public Property normal As vec3
     Public Property UVtextureCoordinate As vec2
     Public Property appendixUV As vec4
     Public Property weightDeform As DeformType
     Public Property edgeScale As Single
+
+    Public Overrides Function ToString() As String
+        Return $"[{weightDeform}] {position}"
+    End Function
 End Class
 
 Public Class VertexData
     Public Property size As Integer
     Public Property data As vertex()
+
+    Public Overrides Function ToString() As String
+        Return $"{size} vertex"
+    End Function
 End Class
 
 Namespace DeformTypes
