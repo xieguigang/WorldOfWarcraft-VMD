@@ -1,4 +1,5 @@
-﻿Imports Microsoft.VisualBasic.Language
+﻿Imports System.ComponentModel
+Imports Microsoft.VisualBasic.Language
 
 Public Class PMXFile
 
@@ -30,11 +31,27 @@ Public Class header
     ''' <returns></returns>
     Public Property globals As globals
 
+    Public Function GetVersion() As Versions
+        If version = 2.0! Then
+            Return Versions.v20
+        ElseIf version = 2.1! Then
+            Return Versions.v21
+        Else
+            Return Versions.Unknown
+        End If
+    End Function
+
     Public Overrides Function ToString() As String
-        Return magics.CharString & version.ToString("F1")
+        Return magics.CharString & GetVersion.Description
     End Function
 
 End Class
+
+Public Enum Versions As Byte
+    <Description("NA")> Unknown = 0
+    <Description("ver2.0")> v20 = 1
+    <Description("ver2.1")> v21 = 2
+End Enum
 
 Public Class globals
 

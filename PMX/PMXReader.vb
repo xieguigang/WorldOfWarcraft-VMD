@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports System.Runtime.CompilerServices
 Imports System.Text
 Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
@@ -347,10 +346,3 @@ Public Module PMXReader
 #End Region
 #End Region
 End Module
-
-Public Enum Versions As Byte
-    Unknown = 0
-
-    <Description("2.0")> v20 = 1
-    <Description("2.1")> v21 = 2
-End Enum
