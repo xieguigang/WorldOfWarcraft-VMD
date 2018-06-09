@@ -51,7 +51,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\App\</OutputPath>
     <DocumentationFile>test.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>full</DebugType>
@@ -130,6 +130,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PMX\PMX.vbproj">
+      <Project>{6D0966AF-BAE1-4CED-8521-C81AAE01338D}</Project>
+      <Name>PMX</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VMD.Extensions\VMD.Extensions.vbproj">
       <Project>{ac2e577b-1d0b-4165-9135-ea5569aa278f}</Project>
       <Name>VMD.Extensions</Name>

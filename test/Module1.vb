@@ -1,4 +1,5 @@
-﻿Imports MikuMikuDance.File.VMD
+﻿Imports MikuMikuDance.File.PMX
+Imports MikuMikuDance.File.VMD
 Imports WMV
 
 Module Module1
@@ -8,6 +9,12 @@ Module Module1
         ' Call vmdWriteTest()
 
         Call loadWMVtest()
+    End Sub
+
+    Sub pmxReadertest()
+        Dim pmx = PMXReader.open("../DATA/vdproject.pmx")
+
+        Pause()
     End Sub
 
     Sub loadWMVtest()
@@ -31,8 +38,8 @@ Module Module1
         Dim path = "C:\Users\Evia\source\repos\VMD\DATA\MOTION.vmd"
         Dim vmd = Reader.OpenAuto(path)
 
-        Call vmd.Save("./130.vmd", Versions.MikuMikuDance130)
-        Call vmd.Save("./newer.vmd", Versions.MikuMikuDanceNewer)
+        Call vmd.Save("./130.vmd", Information.Versions.MikuMikuDance130)
+        Call vmd.Save("./newer.vmd", Information.Versions.MikuMikuDanceNewer)
 
         Dim v130 = Reader.Open130Version("./130.vmd")
         Dim vnewer = Reader.OpenNewerVersion("./newer.vmd")
