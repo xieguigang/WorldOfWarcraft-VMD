@@ -20,6 +20,8 @@ Public Module PMXReader
         End Using
     End Function
 
+    Const byte1 As Byte = 1
+
     ''' <summary>
     ''' 
     ''' </summary>
@@ -31,11 +33,11 @@ Public Module PMXReader
     ''' <returns></returns>
     <Extension>
     Private Function readModelInfo(pmx As BinaryDataReader, encodingByte As Byte) As modelInfo
-        Dim encoding As Encoding = If(encodingByte = 0, Encoding.Unicode, TextEncodings.UTF8WithoutBOM)
-        Dim nameJp$ = pmx.ReadString(BinaryStringFormat.DwordLengthPrefix, encoding)
-        Dim nameEn$ = pmx.ReadString(BinaryStringFormat.ZeroTerminated)
-        Dim commentJp$ = pmx.ReadString(BinaryStringFormat.ZeroTerminated, encoding)
-        Dim commentsEn$ = pmx.ReadString(BinaryStringFormat.ZeroTerminated)
+        Dim encoding As Encoding = Encoding.Unicode Or UTF8.When(encodingByte = byte1)
+        Dim nameJp$ = pmx.ReadString(pmx.ReadUInt32, encoding)
+        Dim nameEn$ = pmx.ReadString(pmx.ReadUInt32, encoding)
+        Dim commentJp$ = pmx.ReadString(pmx.ReadUInt32, encoding)
+        Dim commentsEn$ = pmx.ReadString(pmx.ReadUInt32, encoding)
 
         Return New modelInfo With {
             .modelNameJp = nameJp,
