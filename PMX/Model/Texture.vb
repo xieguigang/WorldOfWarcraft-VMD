@@ -17,6 +17,14 @@ Public Class Texture
     <XmlIgnore>
     Public Property index As Index(Of String)
 
+    Public Function GetTextureName(index As Integer) As String
+        If index >= 0 AndAlso index < size Then
+            Return fileNames(index)
+        Else
+            Return ""
+        End If
+    End Function
+
     Public Overrides Function ToString() As String
         Return $"{size} textures"
     End Function

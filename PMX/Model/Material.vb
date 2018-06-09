@@ -20,6 +20,10 @@ Public Class Material
     Public Property memo As String
     Public Property faceCount As Integer
 
+    Public Overrides Function ToString() As String
+        Return $"{name} ({textureIndex.Name})"
+    End Function
+
     Public Shared Function GetToonName(n As Integer) As String
         If (n < 0) Then
             Return "toon0.bmp"

@@ -17,7 +17,11 @@ End Class
 
 Public Class header
 
-    Public Property signature As Char()
+    ''' <summary>
+    ''' The very first magic bytes at the begining of the pmx file.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property magics As Char()
     Public Property version As Single
     Public Property count As Byte
     ''' <summary>
@@ -27,7 +31,7 @@ Public Class header
     Public Property globals As globals
 
     Public Overrides Function ToString() As String
-        Return signature.CharString & version.ToString("F1")
+        Return magics.CharString & version.ToString("F1")
     End Function
 
 End Class

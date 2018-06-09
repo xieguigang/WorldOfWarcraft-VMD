@@ -81,7 +81,7 @@ Public Module PMXReader
         Dim globals As Byte() = pmx.ReadBytes(count)
 
         Return New header With {
-            .signature = magic,
+            .magics = magic,
             .version = version,
             .count = count,
             .globals = New globals(globals)
@@ -119,7 +119,7 @@ Public Module PMXReader
             If toonFlag = 0 Then
                 toon = New NamedValue(Of Integer) With {
                     .Value = pmx.readIndex(globals.textureIndexSize),
-                    .Name = textures.fileNames(.Value)
+                    .Name = textures.GetTextureName(.Value)
                 }
             Else
                 toon = New NamedValue(Of Integer) With {
@@ -142,11 +142,11 @@ Public Module PMXReader
                 .edgeColor = edgeColor,
                 .edgeSize = edgeSize,
                 .textureIndex = New NamedValue(Of Integer) With {
-                    .Name = textures.fileNames(texNameIndex),
+                    .Name = textures.GetTextureName(texNameIndex),
                     .Value = texNameIndex
                 },
                 .sphereIndex = New NamedValue(Of Integer) With {
-                    .Name = textures.fileNames(sphereIndex),
+                    .Name = textures.GetTextureName(sphereIndex),
                     .Value = sphereIndex
                 },
                 .sphereMode = sphereMode,
