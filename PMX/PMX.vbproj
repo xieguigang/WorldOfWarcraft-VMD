@@ -66,6 +66,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -84,13 +85,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bone.vb" />
-    <Compile Include="Material.vb" />
-    <Compile Include="Texture.vb" />
-    <Compile Include="Surface.vb" />
-    <Compile Include="Vertex.vb" />
+    <Compile Include="Model\Bone.vb" />
+    <Compile Include="Model\Material.vb" />
+    <Compile Include="Model\Texture.vb" />
+    <Compile Include="Model\Surface.vb" />
+    <Compile Include="Model\Vertex.vb" />
     <Compile Include="PMXReader.vb" />
-    <Compile Include="PMX.vb" />
+    <Compile Include="Model\PMX.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
