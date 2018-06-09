@@ -28,7 +28,8 @@ Public Module PMXReader
                         globals:=globals
                     ).ToArray
                 },
-                .FaceVertex = file.readFaceVertex(globals)
+                .faceVertex = file.readFaceVertex(globals),
+                .textureTable = file.readTextureTable(globals)
             }
         End Using
     End Function
@@ -78,9 +79,30 @@ Public Module PMXReader
 #Region "Model Data"
 
     <Extension>
+    Private Function readTextureTable(pmx As BinaryDataReader, globals As globals) As Texture
+        Dim encoding As Encoding = Encoding.Unicode Or UTF8.When(globals.encoding = byte1)
+        Dim numbers = pmx.ReadInt32
+        Dim names$() = New String(numbers - 1) {}
+
+        For i As Integer = 0 To numbers - 1
+            names(i) = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
+        Next
+
+        Return New Texture With {
+            .fileNames = names,
+            .size = numbers
+        }
+    End Function
+
+    <Extension>
     Private Function readFaceVertex(pmx As BinaryDataReader, globals As globals) As Face
-        Dim numbers% = pmx.ReadUInt32
-        Dim index%() = pmx.ReadInt32s(numbers)
+        Dim numbers% = pmx.ReadInt32
+        Dim indexReader As Func(Of Integer) = pmx.indexReader(globals.vertexIndexSize)
+        Dim index%() = New Integer(numbers - 1) {}
+
+        For i As Integer = 0 To numbers - 1
+            index(i) = indexReader()
+        Next
 
         Return New Face With {
             .size = numbers,
@@ -147,6 +169,20 @@ Public Module PMXReader
                 Return pmx.ReadInt16
             Case IndexSize.int
                 Return pmx.ReadInt32
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
+    <Extension>
+    Private Function indexReader(pmx As BinaryDataReader, type As IndexSize) As Func(Of Integer)
+        Select Case type
+            Case IndexSize.byte
+                Return Function() pmx.ReadByte
+            Case IndexSize.short
+                Return Function() pmx.ReadInt16
+            Case IndexSize.int
+                Return Function() pmx.ReadInt32
             Case Else
                 Throw New NotImplementedException
         End Select

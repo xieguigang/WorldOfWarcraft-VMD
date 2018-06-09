@@ -5,7 +5,8 @@ Public Class PMXFile
     Public Property header As header
     Public Property modelInfo As modelInfo
     Public Property vertexData As VertexData
-    Public Property FaceVertex As Face
+    Public Property faceVertex As Face
+    Public Property textureTable As Texture
 
     Public Overrides Function ToString() As String
         Return $"[{header}] {modelInfo}"

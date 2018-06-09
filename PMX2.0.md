@@ -16,6 +16,7 @@ The encoding of the text is either UTF-8 or UTF-16, as specified by the Text Enc
 Field                   | bytes | type      | Notes
 ------------------------+-------+-----------+--------------------------------------------
      -- Header --       |       |           |
+                        |       |           |
 Signature               | 4     | string    | "PMX "
 Version                 | 4     | float     | 2.0
 Length                  | 1     | char      | 8
@@ -27,12 +28,16 @@ Material Index Size     | 1     | char      | 1 = byte, 2 = short, 4 = int
 Bone Index Size         | 1     | char      | 1 = byte, 2 = short, 4 = int
 Morph Index Size        | 1     | char      | 1 = byte, 2 = short, 4 = int
 Rigid Body Index Size   | 1     | char      | 1 = byte, 2 = short, 4 = int
+                        |       |           |
    --  Model info --    |       |           |
+                        |       |           |
 Character Name          | x     | text      | 
 English Character Name  | x     | text      | 
 Comment                 | x     | text      | 
 English Comment         | x     | text      | 
+                        |       |           |
    -- Vertex Data --    |       |           |
+                        |       |           |
 Vertex Count            | 4     | int       | 
 Each Vertex:            |       |           |
 - XYZ Position          | 4 * 3 | float     |
@@ -62,15 +67,21 @@ Each Vertex:            |       |           |
 - - R0 (XYZ)            | 4 * 3 | float     | 
 - - R1 (XYZ)            | 4 * 3 | float     | 
 - Edge Scale            | 4     | float     |
+                        |       |           |
     -- Face Data --     |       |           |
+                        |       |           |
 Face Count              | 4     | int       | 
 Each Face:              |       |           |
 - Vertex Index          | x     | x         | Type specified in Vertex Index Size header field.
+                        |       |           |
   -- Texture Data --    |       |           |
+                        |       |           |
 Texture Count           | 4     | int       |
 Each Texture:           |       |           |
 - File Name             | x     | text      | 
+                        |       |           |
   -- Material Data --   |       |           |
+                        |       |           |
 Material Count          | 4     | int       |
 Each Material:          |       |           |
 - Name                  | x     | text      |
