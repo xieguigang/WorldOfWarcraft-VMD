@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.VisualBasic.Language
+Imports MikuMikuDance.File.PMX.DeformTypes
 
 Public Class PMXFile
 
@@ -22,6 +23,77 @@ End Structure
 Public Structure vec4
     Dim x, y, z, w As Single
 End Structure
+
+Public Class vertex
+    Public Property position As vec3
+    Public Property UVtextureCoordinate As vec2
+    Public Property appendixUV As vec4
+    Public Property weightDeformType As WeightDeformTypes
+
+    Public Property edgeScale As Single
+End Class
+
+Namespace DeformTypes
+
+    Public Enum WeightDeformTypes As Byte
+        BDEF1 = 0
+        BDEF2 = 1
+        BDEF4 = 2
+        SDEF = 4
+        QDEF = 8
+    End Enum
+
+#Region "Version 2.0"
+
+    Public Class BDEF1
+
+        Public Property index1 As Integer
+        Public Property weight1 As Single
+
+        Sub New()
+            weight1 = 1
+        End Sub
+    End Class
+
+    Public Class BDEF2 : Inherits BDEF1
+
+        Public Property index2 As Integer
+
+        Public ReadOnly Property weight2 As Single
+            Get
+                Return 1S - weight1
+            End Get
+        End Property
+    End Class
+
+    Public Class BDEF4 : Inherits BDEF1
+        Public Property index2 As Integer
+        Public Property index3 As Integer
+        Public Property index4 As Integer
+        Public Property weight2 As Single
+        Public Property weight3 As Single
+        Public Property weight4 As Single
+    End Class
+
+    ''' <summary>
+    ''' Spherical deform blending
+    ''' </summary>
+    Public Class SDEF : Inherits BDEF2
+        Public C As vec3
+        Public R0 As vec3
+        Public R1 As vec3
+    End Class
+#End Region
+
+#Region "Version 2.1"
+
+    ''' <summary>
+    ''' Dual quaternion deform blending
+    ''' </summary>
+    Public Class QDEF : Inherits BDEF4
+    End Class
+#End Region
+End Namespace
 
 Public Class header
 
@@ -49,12 +121,18 @@ Public Class globals
     ''' <returns></returns>
     Public Property encoding As Byte
     Public Property addiVec4 As Byte
-    Public Property vertexIndexSize As Byte
-    Public Property textureIndexSize As Byte
-    Public Property materialIndexSize As Byte
-    Public Property boneIndexSize As Byte
-    Public Property morphIndexSize As Byte
-    Public Property rigidBodyIndexSize As Byte
+    Public Property vertexIndexSize As IndexSize
+    Public Property textureIndexSize As IndexSize
+    Public Property materialIndexSize As IndexSize
+    Public Property boneIndexSize As IndexSize
+    Public Property morphIndexSize As IndexSize
+    Public Property rigidBodyIndexSize As IndexSize
+
+    Public Enum IndexSize As Byte
+        [byte] = 1
+        [short] = 2
+        [int] = 4
+    End Enum
 
     Sub New()
     End Sub
