@@ -1,5 +1,7 @@
 # PMX 2.0 file format #
 
+> https://gist.github.com/ulrikdamm/8274171
+
 This is a description of the PMX file format. This is used for 3D models in Miku Miku Dance (MMD). 
 
 Since I couldn't find any English descriptions of the PMX file format, I've made this, which is translated from http://gulshan-i-raz.geo.jp/labs/2012/10/17/pmx-format1/. I haven't used this file format yet, so please don't ask me what everything means.
