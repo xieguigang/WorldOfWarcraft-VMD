@@ -26,9 +26,9 @@ Public Module PMXReader
         Dim count = pmx.ReadByte
         Dim globals As Byte() = pmx.ReadBytes(count)
         Dim nameJp$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix, encoding:=Encoding.Unicode)
-        Dim nameEn$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix)
-        Dim commentJp$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix, encoding:=Encoding.Unicode)
-        Dim commentsEn$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix)
+        Dim nameEn$ = pmx.ReadString(format:=BinaryStringFormat.ZeroTerminated)
+        Dim commentJp$ = pmx.ReadString(format:=BinaryStringFormat.ZeroTerminated, encoding:=Encoding.Unicode)
+        Dim commentsEn$ = pmx.ReadString(format:=BinaryStringFormat.ZeroTerminated)
 
         Return New header With {
             .signature = magic,
