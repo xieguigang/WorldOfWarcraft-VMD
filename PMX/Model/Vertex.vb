@@ -1,30 +1,7 @@
 ﻿Imports MikuMikuDance.File.PMX.DeformTypes
 
-Public Structure vec2
-    Dim x, y As Single
-
-    Public Overrides Function ToString() As String
-        Return $"({x}, {y})"
-    End Function
-End Structure
-
-Public Structure vec3
-    Dim x, y, z As Single
-
-    Public Overrides Function ToString() As String
-        Return $"({x}, {y}, {z})"
-    End Function
-End Structure
-
-Public Structure vec4
-    Dim x, y, z, w As Single
-
-    Public Overrides Function ToString() As String
-        Return $"({x}, {y}, {z}, {w})"
-    End Function
-End Structure
-
 Public Class vertex
+
     Public Property position As vec3
     Public Property normal As vec3
     Public Property UVtextureCoordinate As vec2
@@ -37,9 +14,7 @@ Public Class vertex
     End Function
 End Class
 
-Public Class VertexData
-    Public Property size As Integer
-    Public Property data As vertex()
+Public Class VertexData : Inherits ListData(Of vertex)
 
     Public Overrides Function ToString() As String
         Return $"{size} vertex"

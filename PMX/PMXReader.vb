@@ -1,7 +1,10 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Runtime.CompilerServices
 Imports System.Text
+Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 Imports Microsoft.VisualBasic.Data.IO
+Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Text
 Imports MikuMikuDance.File.PMX.DeformTypes
 Imports MikuMikuDance.File.PMX.globals
@@ -17,6 +20,7 @@ Public Module PMXReader
         Using file As BinaryDataReader = pmx.OpenBinaryReader
             Dim header As header = file.readHeader
             Dim globals = header.globals
+            Dim textures As New Value(Of Texture)
 
             Return New PMXFile With {
                 .header = header,
@@ -29,7 +33,15 @@ Public Module PMXReader
                     ).ToArray
                 },
                 .faceVertex = file.readFaceVertex(globals),
-                .textureTable = file.readTextureTable(globals)
+                .textureTable = (textures = file.readTextureTable(globals)),
+                .materials = New MaterialList With {
+                    .size = file.ReadInt32,
+                    .data = file.readMaterials(
+                        n:= .size,
+                        globals:=globals,
+                        textures:=textures
+                    ).ToArray
+                }
             }
         End Using
     End Function
@@ -77,6 +89,74 @@ Public Module PMXReader
     End Function
 
 #Region "Model Data"
+
+    <Extension>
+    Private Iterator Function readMaterials(pmx As BinaryDataReader, n%, globals As globals, textures As Texture) As IEnumerable(Of Material)
+        Dim encoding As Encoding = Encoding.Unicode Or UTF8.When(globals.encoding = byte1)
+
+        For i As Integer = 0 To n - 1
+            Dim name$ = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
+            Dim enName$ = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
+            ' argb
+            Dim argb!() = pmx.ReadSingles(4)
+            Dim diffuse As Color = Color.FromArgb(argb(0), argb(1), argb(2), argb(3))
+            ' rgb
+            argb = pmx.ReadSingles(3)
+            Dim specular As Color = Color.FromArgb(argb(0), argb(1), argb(2))
+            Dim specularity! = pmx.ReadSingle
+            argb = pmx.ReadSingles(3)
+            Dim ambient As Color = Color.FromArgb(argb(0), argb(1), argb(2))
+            Dim flag As DrawingModes = pmx.ReadByte
+            argb = pmx.ReadSingles(4)
+            Dim edgeColor As Color = Color.FromArgb(argb(0), argb(1), argb(2), argb(3))
+            Dim edgeSize! = pmx.ReadSingle
+            Dim texNameIndex = pmx.readIndex(globals.textureIndexSize)
+            Dim sphereIndex = pmx.readIndex(globals.textureIndexSize)
+            Dim sphereMode = DirectCast(pmx.ReadByte, SphereModes)
+            Dim toon As NamedValue(Of Integer)
+            Dim toonFlag = pmx.ReadByte
+
+            If toonFlag = 0 Then
+                toon = New NamedValue(Of Integer) With {
+                    .Value = pmx.readIndex(globals.textureIndexSize),
+                    .Name = textures.fileNames(.Value)
+                }
+            Else
+                toon = New NamedValue(Of Integer) With {
+                    .Value = pmx.ReadByte,
+                    .Name = Material.GetToonName(.Value)
+                }
+            End If
+
+            Dim memo = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
+            Dim faces = pmx.ReadInt32
+
+            Yield New Material With {
+                .name = name,
+                .enUS = enName,
+                .diffuseColor = diffuse,
+                .specularColor = specular,
+                .specularity = specularity,
+                .ambientColor = ambient,
+                .drawingMode = flag,
+                .edgeColor = edgeColor,
+                .edgeSize = edgeSize,
+                .textureIndex = New NamedValue(Of Integer) With {
+                    .Name = textures.fileNames(texNameIndex),
+                    .Value = texNameIndex
+                },
+                .sphereIndex = New NamedValue(Of Integer) With {
+                    .Name = textures.fileNames(sphereIndex),
+                    .Value = sphereIndex
+                },
+                .sphereMode = sphereMode,
+                .toonFlag = toonFlag,
+                .toonIndex = toon,
+                .memo = memo,
+                .faceCount = faces
+            }
+        Next
+    End Function
 
     <Extension>
     Private Function readTextureTable(pmx As BinaryDataReader, globals As globals) As Texture

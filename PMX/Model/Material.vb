@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 
 Public Class Material
 
@@ -11,17 +12,32 @@ Public Class Material
     Public Property drawingMode As DrawingModes
     Public Property edgeColor As Color
     Public Property edgeSize As Single
-    Public Property textureIndex As Integer
-    Public Property sphereIndex As Integer
+    Public Property textureIndex As NamedValue(Of Integer)
+    Public Property sphereIndex As NamedValue(Of Integer)
     Public Property sphereMode As SphereModes
     Public Property toonFlag As Byte
-    Public Property toonIndex As Integer
+    Public Property toonIndex As NamedValue(Of Integer)
     Public Property memo As String
-    Public Property faceIndex As Integer
+    Public Property faceCount As Integer
+
+    Public Shared Function GetToonName(n As Integer) As String
+        If (n < 0) Then
+            Return "toon0.bmp"
+        Else
+            Return ("toon" & (n + 1).ToString("00") & ".bmp")
+        End If
+    End Function
 
 End Class
 
-Public Enum DrawingModes
+Public Class MaterialList : Inherits ListData(Of Material)
+
+    Public Overrides Function ToString() As String
+        Return $"{size} materials"
+    End Function
+End Class
+
+Public Enum DrawingModes As Byte
     None = 0
     DoubleSided = &H1
     Shadow = &H2

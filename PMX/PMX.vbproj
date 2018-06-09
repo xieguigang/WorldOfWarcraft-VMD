@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Bone.vb" />
+    <Compile Include="Model\Base.vb" />
     <Compile Include="Model\Material.vb" />
     <Compile Include="Model\Texture.vb" />
     <Compile Include="Model\Surface.vb" />
