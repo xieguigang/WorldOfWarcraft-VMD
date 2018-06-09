@@ -25,7 +25,7 @@ Public Module PMXReader
                     .size = file.ReadUInt32,
                     .data = file.populateVertex(
                         n:= .size,
-                        indexSize:=globals.vertexIndexSize
+                        globals:=globals
                     ).ToArray
                 }
             }
@@ -77,7 +77,7 @@ Public Module PMXReader
 #Region "Model Data"
 
     <Extension>
-    Private Iterator Function populateVertex(pmx As BinaryDataReader, n%, indexSize As IndexSize) As IEnumerable(Of vertex)
+    Private Iterator Function populateVertex(pmx As BinaryDataReader, n%, globals As globals) As IEnumerable(Of vertex)
         For i As Integer = 0 To n - 1
             Dim xyz As New vec3 With {
                 .x = pmx.ReadSingle,
@@ -88,19 +88,24 @@ Public Module PMXReader
                 .x = pmx.ReadSingle,
                 .y = pmx.ReadSingle
             }
+            Dim appendixUVVector!() = pmx _
+                .ReadBytes(4 * globals.addiVec4) _
+                .Split(4, False) _
+                .Select(Function(b) BitConverter.ToSingle(b, Scan0)) _
+                .ToArray
             Dim appendixUV As New vec4 With {
-                .x = pmx.ReadSingle,
-                .y = pmx.ReadSingle,
-                .z = pmx.ReadSingle,
-                .w = pmx.ReadSingle
+                .x = appendixUVVector.ElementAtOrDefault(0),
+                .y = appendixUVVector.ElementAtOrDefault(1),
+                .z = appendixUVVector.ElementAtOrDefault(2),
+                .w = appendixUVVector.ElementAtOrDefault(3)
             }
             Dim type As New DeformType With {
                 .type = pmx.ReadByte,
-                .BDEF1 = pmx.readBDEF1(.type, indexSize),
-                .BDEF2 = pmx.readBDEF2(.type, indexSize),
-                .BDEF4 = pmx.readBDEF4(.type, indexSize),
-                .SDEF = pmx.readSDEF(.type, indexSize),
-                .QDEF = pmx.readQDEF(.type, indexSize)
+                .BDEF1 = pmx.readBDEF1(.type, globals.vertexIndexSize),
+                .BDEF2 = pmx.readBDEF2(.type, globals.vertexIndexSize),
+                .BDEF4 = pmx.readBDEF4(.type, globals.vertexIndexSize),
+                .SDEF = pmx.readSDEF(.type, globals.vertexIndexSize),
+                .QDEF = pmx.readQDEF(.type, globals.vertexIndexSize)
             }
 
             Yield New vertex With {
