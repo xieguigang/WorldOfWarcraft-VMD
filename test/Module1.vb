@@ -8,6 +8,8 @@ Module Module1
         'Call vmdReaderTest()
         ' Call vmdWriteTest()
 
+        Call pmxReadertest()
+
         Call loadWMVtest()
     End Sub
 

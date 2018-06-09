@@ -1,8 +1,15 @@
 ﻿Imports System.ComponentModel
 Imports System.Runtime.CompilerServices
+Imports System.Text
 Imports Microsoft.VisualBasic.Data.IO
+Imports Microsoft.VisualBasic.Text
 
 Public Module PMXReader
+
+    ''' <summary>
+    ''' MMD之中的日文编码
+    ''' </summary>
+    ReadOnly Shift_JIS932 As Encoding = Encoding.GetEncoding("shift_jis")
 
     Public Function Open(pmx As String) As PMXFile
         Using file As BinaryDataReader = pmx.OpenBinaryReader
@@ -18,9 +25,9 @@ Public Module PMXReader
         Dim version = pmx.ReadSingle
         Dim count = pmx.ReadByte
         Dim globals As Byte() = pmx.ReadBytes(count)
-        Dim nameJp$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix)
+        Dim nameJp$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix, encoding:=Encoding.Unicode)
         Dim nameEn$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix)
-        Dim commentJp$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix)
+        Dim commentJp$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix, encoding:=Encoding.Unicode)
         Dim commentsEn$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix)
 
         Return New header With {
