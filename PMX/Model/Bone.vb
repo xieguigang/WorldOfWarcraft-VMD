@@ -2,13 +2,18 @@
 
     Public Property name As String
     Public Property enUS As String
+    Public Property position As vec3
     Public Property boneFlag As BoneFlags
     Public Property parentIndex As Integer
-    Public Property connectedToIndex As Integer
+    Public Property connectedTo As connectTo
     Public Property appendParent As Integer
     Public Property appendRatio As Single
+    Public Property axis As vec3
     Public Property level As Integer
-    Public Property local As vec3
+    Public Property localX As vec3
+    Public Property localY As vec3
+    Public Property localZ As vec3
+    Public Property extKey As Integer
     Public Property IK As IK
     Public Property IKtype As IKKinds
 
@@ -16,6 +21,18 @@
         Return name
     End Function
 
+End Class
+
+Public Structure connectTo
+    Dim toBoneIndex As Integer
+    Dim toOffset As vec3
+End Structure
+
+Public Class bones : Inherits ListData(Of Bone)
+
+    Public Overrides Function ToString() As String
+        Return $"{size} bones"
+    End Function
 End Class
 
 Public Structure IK
@@ -30,7 +47,7 @@ Public Structure Link
     Dim isLimited As Boolean
 End Structure
 
-<Flags> Public Enum BoneFlags
+<Flags> Public Enum BoneFlags As UShort
     None = 0
     ToBone = 1
     Rotation = 2

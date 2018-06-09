@@ -40,6 +40,13 @@ Public Module PMXReader
                         globals:=globals,
                         textures:=textures
                     ).ToArray
+                },
+                .bones = New bones With {
+                    .size = file.ReadInt32,
+                    .data = file.readBones(
+                        n:= .size,
+                        globals:=globals
+                    ).ToArray
                 }
             }
         End Using
@@ -88,6 +95,115 @@ Public Module PMXReader
     End Function
 
 #Region "Model Data"
+
+    <Extension>
+    Private Iterator Function readBones(pmx As BinaryDataReader, n%, globals As globals) As IEnumerable(Of Bone)
+        Dim encoding As Encoding = Encoding.Unicode Or UTF8.When(globals.encoding = byte1)
+
+        For i As Integer = 0 To n - 1
+            Dim name$ = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
+            Dim enUS$ = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
+            Dim position As New vec3 With {
+                .x = pmx.ReadSingle,
+                .y = pmx.ReadSingle,
+                .z = pmx.ReadSingle
+            }
+            Dim parentIndex% = pmx.readIndex(globals.boneIndexSize)
+            Dim level% = pmx.ReadInt32
+            Dim flag As BoneFlags = pmx.ReadUInt16
+            Dim connectedToBone%
+            Dim connectedToOffset As vec3
+
+            If flag.CheckFlag(BoneFlags.ToBone) Then
+                connectedToBone = pmx.readIndex(globals.boneIndexSize)
+            Else
+                connectedToOffset = New vec3 With {
+                    .x = pmx.ReadSingle,
+                    .y = pmx.ReadSingle,
+                    .z = pmx.ReadSingle
+                }
+            End If
+
+            Dim appendParent%
+            Dim appendRatio!
+
+            If flag.CheckFlag(BoneFlags.AppendRotation) OrElse flag.CheckFlag(BoneFlags.AppendTranslation) Then
+                appendParent = pmx.readIndex(globals.boneIndexSize)
+                appendRatio = pmx.ReadSingle
+            End If
+
+            Dim axis As vec3
+
+            If flag.CheckFlag(BoneFlags.FixAxis) Then
+                axis = New vec3 With {
+                    .x = pmx.ReadSingle,
+                    .y = pmx.ReadSingle,
+                    .z = pmx.ReadSingle
+                }
+            End If
+
+            Dim localX = vec3.UnitX, localY = vec3.UnitY, localZ = vec3.UnitZ
+
+            If flag.CheckFlag(BoneFlags.LocalFrame) Then
+                localX = New vec3 With {
+                    .x = pmx.ReadSingle,
+                    .y = pmx.ReadSingle,
+                    .z = pmx.ReadSingle
+                }
+                localZ = New vec3 With {
+                    .x = pmx.ReadSingle,
+                    .y = pmx.ReadSingle,
+                    .z = pmx.ReadSingle
+                }
+
+                localY = localZ.Cross(localX)
+                localZ = localX.Cross(localY)
+            End If
+
+            Dim extKey%
+
+            If flag.CheckFlag(BoneFlags.ExtParent) Then
+                extKey = pmx.ReadInt32
+            End If
+
+            Dim IK As IK
+
+            If flag.CheckFlag(BoneFlags.IK) Then
+                IK = pmx.readIK
+            End If
+
+            Yield New Bone With {
+                .name = name,
+                .enUS = enUS,
+                .position = position,
+                .parentIndex = parentIndex,
+                .level = level,
+                .boneFlag = flag,
+                .connectedTo = New connectTo With {
+                    .toBoneIndex = connectedToBone,
+                    .toOffset = connectedToOffset
+                },
+                .appendParent = appendParent,
+                .appendRatio = appendRatio,
+                .axis = axis,
+                .localX = localX,
+                .localY = localY,
+                .localZ = localZ,
+                .extKey = extKey,
+                .IK = pmx.readIK
+            }
+        Next
+    End Function
+
+    <Extension>
+    Private Function readIK(pmx As BinaryDataReader) As IK
+
+    End Function
+
+    <Extension>
+    Public Function CheckFlag(flags As BoneFlags, check As BoneFlags) As Boolean
+        Return (check And flags) = check
+    End Function
 
     <Extension>
     Private Iterator Function readMaterials(pmx As BinaryDataReader, n%, globals As globals, textures As Texture) As IEnumerable(Of Material)
