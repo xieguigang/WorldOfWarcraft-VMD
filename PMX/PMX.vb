@@ -49,12 +49,18 @@ Namespace DeformTypes
     End Enum
 
     Public Structure DeformType
+
         Dim type As WeightDeformTypes
+
         Dim BDEF1 As BDEF1
         Dim BDEF2 As BDEF2
         Dim BDEF4 As BDEF4
         Dim SDEF As SDEF
         Dim QDEF As QDEF
+
+        Public Overrides Function ToString() As String
+            Return type.Description
+        End Function
     End Structure
 
 #Region "Version 2.0"
