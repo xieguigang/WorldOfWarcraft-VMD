@@ -1,45 +1,48 @@
-﻿Public Class ListData(Of T)
+﻿Namespace Model
 
-    Public Property size As Integer
-    Public Property data As T()
+    Public Class ListData(Of T)
 
-End Class
+        Public Property size As Integer
+        Public Property data As T()
 
-Public Structure vec2
-    Dim x, y As Single
+    End Class
 
-    Public Overrides Function ToString() As String
-        Return $"({x}, {y})"
-    End Function
-End Structure
+    Public Structure vec2
+        Dim x, y As Single
 
-Public Structure vec3
+        Public Overrides Function ToString() As String
+            Return $"({x}, {y})"
+        End Function
+    End Structure
 
-    Dim x, y, z As Single
+    Public Structure vec3
 
-    Public Shared ReadOnly Property UnitX As New vec3(1, 0, 0)
-    Public Shared ReadOnly Property UnitY As New vec3(0, 1, 0)
-    Public Shared ReadOnly Property UnitZ As New vec3(0, 0, 1)
+        Dim x, y, z As Single
 
-    Sub New(x!, y!, z!)
-        Me.x = x
-        Me.y = y
-        Me.z = z
-    End Sub
+        Public Shared ReadOnly Property UnitX As New vec3(1, 0, 0)
+        Public Shared ReadOnly Property UnitY As New vec3(0, 1, 0)
+        Public Shared ReadOnly Property UnitZ As New vec3(0, 0, 1)
 
-    Public Function Cross(b As vec3) As vec3
+        Sub New(x!, y!, z!)
+            Me.x = x
+            Me.y = y
+            Me.z = z
+        End Sub
 
-    End Function
+        Public Function Cross(b As vec3) As vec3
 
-    Public Overrides Function ToString() As String
-        Return $"({x}, {y}, {z})"
-    End Function
-End Structure
+        End Function
 
-Public Structure vec4
-    Dim x, y, z, w As Single
+        Public Overrides Function ToString() As String
+            Return $"({x}, {y}, {z})"
+        End Function
+    End Structure
 
-    Public Overrides Function ToString() As String
-        Return $"({x}, {y}, {z}, {w})"
-    End Function
-End Structure
+    Public Structure vec4
+        Dim x, y, z, w As Single
+
+        Public Overrides Function ToString() As String
+            Return $"({x}, {y}, {z}, {w})"
+        End Function
+    End Structure
+End Namespace

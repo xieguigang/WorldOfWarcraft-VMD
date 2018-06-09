@@ -1,4 +1,5 @@
 ﻿Imports MikuMikuDance.File.PMX
+Imports MikuMikuDance.File.PMX.Model
 Imports MikuMikuDance.File.VMD
 Imports WorldOfWarcraft
 

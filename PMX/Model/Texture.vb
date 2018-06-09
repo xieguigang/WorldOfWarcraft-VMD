@@ -1,32 +1,36 @@
 ﻿Imports System.Xml.Serialization
 Imports Microsoft.VisualBasic.ComponentModel.Collection
 
-Public Class Texture
+Namespace Model
 
-    Public Property size As Integer
+    Public Class Texture
 
-    Public Property fileNames As String()
-        Get
-            Return index.Objects
-        End Get
-        Set(value As String())
-            index = value
-        End Set
-    End Property
+        Public Property size As Integer
 
-    <XmlIgnore>
-    Public Property index As Index(Of String)
+        Public Property fileNames As String()
+            Get
+                Return index.Objects
+            End Get
+            Set(value As String())
+                index = value
+            End Set
+        End Property
 
-    Public Function GetTextureName(index As Integer) As String
-        If index >= 0 AndAlso index < size Then
-            Return fileNames(index)
-        Else
-            Return ""
-        End If
-    End Function
+        <XmlIgnore>
+        Public Property index As Index(Of String)
 
-    Public Overrides Function ToString() As String
-        Return $"{size} textures"
-    End Function
+        Public Function GetTextureName(index As Integer) As String
+            If index >= 0 AndAlso index < size Then
+                Return fileNames(index)
+            Else
+                Return ""
+            End If
+        End Function
 
-End Class
+        Public Overrides Function ToString() As String
+            Return $"{size} textures"
+        End Function
+
+    End Class
+
+End Namespace

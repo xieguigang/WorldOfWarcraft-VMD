@@ -5,8 +5,12 @@ Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 Imports Microsoft.VisualBasic.Data.IO
 Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Text
-Imports MikuMikuDance.File.PMX.DeformTypes
-Imports MikuMikuDance.File.PMX.globals
+Imports MikuMikuDance.File.PMX.Model
+Imports MikuMikuDance.File.PMX.Model.BoneData
+Imports MikuMikuDance.File.PMX.Model.Information
+Imports MikuMikuDance.File.PMX.Model.Information.globals
+Imports MikuMikuDance.File.PMX.Model.VertexData
+Imports MikuMikuDance.File.PMX.Model.VertexData.DeformTypes
 
 Public Module PMXReader
 
@@ -24,7 +28,7 @@ Public Module PMXReader
             Return New PMXFile With {
                 .header = header,
                 .modelInfo = file.readModelInfo(globals.encoding),
-                .vertexData = New VertexData With {
+                .vertexData = New vertexs With {
                     .size = file.ReadInt32,
                     .data = file.populateVertex(
                         n:= .size,
@@ -342,7 +346,7 @@ Public Module PMXReader
 
         Return New Face With {
             .size = numbers,
-            .VertexIndex = index
+            .vertexIndices = index
         }
     End Function
 

@@ -1,14 +1,17 @@
-﻿Public Class Surface
+﻿Namespace Model
 
-End Class
+    Public Class Surface
 
-Public Class Face
+    End Class
 
-    Public Property size As Integer
-    Public Property VertexIndex As Integer()
+    Public Class Face
 
-    Public Overrides Function ToString() As String
-        Return $"{size} vertex index"
-    End Function
+        Public Property size As Integer
+        Public Property vertexIndices As Integer()
 
-End Class
+        Public Overrides Function ToString() As String
+            Return $"{size} vertex index"
+        End Function
+
+    End Class
+End Namespace
