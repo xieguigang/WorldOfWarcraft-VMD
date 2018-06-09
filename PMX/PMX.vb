@@ -28,8 +28,7 @@ Public Class vertex
     Public Property position As vec3
     Public Property UVtextureCoordinate As vec2
     Public Property appendixUV As vec4
-    Public Property weightDeformType As WeightDeformTypes
-
+    Public Property weightDeform As DeformType
     Public Property edgeScale As Single
 End Class
 
@@ -42,6 +41,15 @@ Namespace DeformTypes
         SDEF = 4
         QDEF = 8
     End Enum
+
+    Public Structure DeformType
+        Dim type As WeightDeformTypes
+        Dim BDEF1 As BDEF1
+        Dim BDEF2 As BDEF2
+        Dim BDEF4 As BDEF4
+        Dim SDEF As SDEF
+        Dim QDEF As QDEF
+    End Structure
 
 #Region "Version 2.0"
 
