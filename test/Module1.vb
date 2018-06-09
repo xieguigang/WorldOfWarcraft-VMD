@@ -1,6 +1,6 @@
 ﻿Imports MikuMikuDance.File.PMX
 Imports MikuMikuDance.File.VMD
-Imports WMV
+Imports WorldOfWarcraft
 
 Module Module1
 
@@ -14,14 +14,14 @@ Module Module1
     End Sub
 
     Sub pmxReadertest()
-        Dim pmx = PMXReader.open("../DATA/vdproject.pmx")
+        Dim pmx = PMXReader.Open("../DATA/vdproject.pmx")
 
         Pause()
     End Sub
 
     Sub loadWMVtest()
         Dim path = "C:\Users\Evia\source\repos\VMD\DATA\ModelInfo.xml"
-        Dim wmv = ModelInfo.Load(path)
+        Dim wmv = Plugins.WMV.ModelInfo.Load(path)
 
         Pause()
     End Sub

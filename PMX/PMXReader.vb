@@ -14,9 +14,35 @@ Public Module PMXReader
     Public Function Open(pmx As String) As PMXFile
         Using file As BinaryDataReader = pmx.OpenBinaryReader
             Return New PMXFile With {
-                .header = file.readHeader
+                .header = file.readHeader,
+                .modelInfo = file.readModelInfo(.header.globals.encoding)
             }
         End Using
+    End Function
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="pmx"></param>
+    ''' <param name="encodingByte">
+    ''' + 0 = UTF-16
+    ''' + 1 = UTF-8
+    ''' </param>
+    ''' <returns></returns>
+    <Extension>
+    Private Function readModelInfo(pmx As BinaryDataReader, encodingByte As Byte) As modelInfo
+        Dim encoding As Encoding = If(encodingByte = 0, Encoding.Unicode, TextEncodings.UTF8WithoutBOM)
+        Dim nameJp$ = pmx.ReadString(BinaryStringFormat.DwordLengthPrefix, encoding)
+        Dim nameEn$ = pmx.ReadString(BinaryStringFormat.ZeroTerminated)
+        Dim commentJp$ = pmx.ReadString(BinaryStringFormat.ZeroTerminated, encoding)
+        Dim commentsEn$ = pmx.ReadString(BinaryStringFormat.ZeroTerminated)
+
+        Return New modelInfo With {
+            .modelNameJp = nameJp,
+            .modelNameUniversal = nameEn,
+            .commentsJp = commentJp,
+            .commentsUniversal = commentsEn
+        }
     End Function
 
     <Extension>
@@ -25,20 +51,12 @@ Public Module PMXReader
         Dim version = pmx.ReadSingle
         Dim count = pmx.ReadByte
         Dim globals As Byte() = pmx.ReadBytes(count)
-        Dim nameJp$ = pmx.ReadString(format:=BinaryStringFormat.DwordLengthPrefix, encoding:=Encoding.Unicode)
-        Dim nameEn$ = pmx.ReadString(format:=BinaryStringFormat.ZeroTerminated)
-        Dim commentJp$ = pmx.ReadString(format:=BinaryStringFormat.ZeroTerminated, encoding:=Encoding.Unicode)
-        Dim commentsEn$ = pmx.ReadString(format:=BinaryStringFormat.ZeroTerminated)
 
         Return New header With {
             .signature = magic,
             .version = version,
             .count = count,
-            .globals = New globals(globals),
-            .modelNameJp = nameJp,
-            .modelNameUniversal = nameEn,
-            .commentsJp = commentJp,
-            .commentsUniversal = commentsEn
+            .globals = New globals(globals)
         }
     End Function
 End Module
