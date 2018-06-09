@@ -134,7 +134,10 @@ Public Module PMXReader
         If type <> WeightDeformTypes.BDEF1 Then
             Return Nothing
         Else
-            Return New BDEF1 With {.index1 = pmx.Read}
+            Return New BDEF1 With {
+                .index1 = pmx.readIndex(size),
+                .weight1 = +1S
+            }
         End If
     End Function
 
@@ -143,7 +146,11 @@ Public Module PMXReader
         If type <> WeightDeformTypes.BDEF2 Then
             Return Nothing
         Else
-
+            Return New BDEF2 With {
+                .index1 = pmx.readIndex(size),
+                .index2 = pmx.readIndex(size),
+                .weight1 = pmx.ReadSingle
+            }
         End If
     End Function
 
@@ -152,7 +159,16 @@ Public Module PMXReader
         If type <> WeightDeformTypes.BDEF4 Then
             Return Nothing
         Else
-
+            Return New BDEF4 With {
+                .index1 = pmx.readIndex(size),
+                .index2 = pmx.readIndex(size),
+                .index3 = pmx.readIndex(size),
+                .index4 = pmx.readIndex(size),
+                .weight1 = pmx.ReadSingle,
+                .weight2 = pmx.ReadSingle,
+                .weight3 = pmx.ReadSingle,
+                .weight4 = pmx.ReadSingle
+            }
         End If
     End Function
 
@@ -161,7 +177,14 @@ Public Module PMXReader
         If type <> WeightDeformTypes.SDEF Then
             Return Nothing
         Else
-
+            Return New SDEF With {
+                .index1 = pmx.readIndex(size),
+                .index2 = pmx.readIndex(size),
+                .weight1 = pmx.ReadSingle,
+                .C = New vec3 With {.x = pmx.ReadSingle, .y = pmx.ReadSingle, .z = pmx.ReadSingle},
+                .R0 = New vec3 With {.x = pmx.ReadSingle, .y = pmx.ReadSingle, .z = pmx.ReadSingle},
+                .R1 = New vec3 With {.x = pmx.ReadSingle, .y = pmx.ReadSingle, .z = pmx.ReadSingle}
+            }
         End If
     End Function
 
@@ -170,7 +193,16 @@ Public Module PMXReader
         If type <> WeightDeformTypes.QDEF Then
             Return Nothing
         Else
-
+            Return New QDEF With {
+                .index1 = pmx.readIndex(size),
+                .index2 = pmx.readIndex(size),
+                .index3 = pmx.readIndex(size),
+                .index4 = pmx.readIndex(size),
+                .weight1 = pmx.ReadSingle,
+                .weight2 = pmx.ReadSingle,
+                .weight3 = pmx.ReadSingle,
+                .weight4 = pmx.ReadSingle
+            }
         End If
     End Function
 #End Region
