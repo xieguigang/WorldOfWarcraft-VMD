@@ -130,6 +130,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\m2\m2.vbproj">
+      <Project>{35a5d798-2d99-4f5e-b10a-d8e94a2df153}</Project>
+      <Name>m2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PMX\PMX.vbproj">
       <Project>{6D0966AF-BAE1-4CED-8521-C81AAE01338D}</Project>
       <Name>PMX</Name>
@@ -141,10 +145,6 @@
     <ProjectReference Include="..\VMD\VMD.vbproj">
       <Project>{90379434-c390-440c-ac0c-5e455e6c2675}</Project>
       <Name>VMD</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WMV\WMV.vbproj">
-      <Project>{35a5d798-2d99-4f5e-b10a-d8e94a2df153}</Project>
-      <Name>WMV</Name>
     </ProjectReference>
     <ProjectReference Include="E:\repo\xDoc\Yilia\runtime\sciBASIC#\Data\BinaryData\BinaryData\BinaryData.vbproj">
       <Project>{487d7c92-d05a-4908-bf81-e6baba0bf592}</Project>
