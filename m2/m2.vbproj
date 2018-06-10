@@ -84,11 +84,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\GeometryAndRendering.vb" />
-    <Compile Include="XmlReader.vb" />
-    <Compile Include="Model\SkeletonAndAnimation.vb" />
-    <Compile Include="Model\header.vb" />
-    <Compile Include="Model\ModelInfo.xml.vb" />
+    <Compile Include="m2\GeometryAndRendering.vb" />
+    <Compile Include="m2XmlReader.vb" />
+    <Compile Include="m2\SkeletonAndAnimation.vb" />
+    <Compile Include="m2\header.vb" />
+    <Compile Include="m2\ModelInfo.xml.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -129,6 +129,9 @@
       <Project>{fecce1fd-e1d4-49e3-a668-60bb5e7aed99}</Project>
       <Name>47-dotnet_Microsoft.VisualBasic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ogre\" />
   </ItemGroup>
   <Import Project="..\SharedXml\SharedXml.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

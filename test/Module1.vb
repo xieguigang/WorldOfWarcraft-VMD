@@ -2,7 +2,7 @@
 Imports MikuMikuDance.File.PMX
 Imports MikuMikuDance.File.PMX.Model
 Imports MikuMikuDance.File.VMD
-Imports WorldOfWarcraft
+Imports WorldOfWarcraft.Plugins.WMV
 
 Module Module1
 
@@ -26,7 +26,7 @@ Module Module1
 
     Sub loadWMVtest()
         Dim path = "C:\Users\Evia\source\repos\VMD\DATA\ModelInfo.xml"
-        Dim wmv = Plugins.WMV.ModelInfo.Load(path)
+        Dim wmv = m2.ModelInfo.Load(path)
 
         Pause()
     End Sub
