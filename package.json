@@ -1,0 +1,31 @@
+{
+  "name": "worldofwarcraft-vmd",
+  "description": "WorldOfWarcraft m2 model WMV to VMD export plugins.",
+  "version": "1.1.0",
+  "author": "xieguigang <xie.guigang@gmail.com>",
+  "main": "./WorldOfWarcraft-VMD.sln",
+  "scripts": {
+    "test": "tap test/test.vbproj"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xieguigang/WorldOfWarcraft-VMD.git"
+  },
+  "keywords": [
+    "world of warcraft",
+    "mikumikudance",
+    "m2",
+    "vmd",
+    "pmx",
+    "mmd"
+  ],
+  "dependencies": {
+    "summary": "0.3.x",
+    "distributions": "^1.0.0"
+  },
+  "devDependencies": {
+    "sciBASIC": "^3.2.2",
+    "dot-net": "^4.7"
+  },
+  "license": "GPL3"
+}
