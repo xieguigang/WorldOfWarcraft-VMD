@@ -10,7 +10,12 @@ Namespace ogre
 
         <MethodImpl(MethodImplOptions.AggressiveInlining)>
         Public Shared Function LoadSkeletonXml(path As String) As skeleton
-            Return path.ReadAllText.CreateObjectFromXmlFragment(Of skeleton)
+            Return path _
+                .ReadAllText _
+                .CreateObjectFromXmlFragment(Of skeleton)(
+                    Function(xml)
+                        Return xml.Replace("#QNAN", "")
+                    End Function)
         End Function
     End Class
 End Namespace
