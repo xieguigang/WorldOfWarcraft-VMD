@@ -2,6 +2,9 @@
 
 -----------------------------------
 
++ [PMX 2.0](PMX2.0.md)
++ [PMX 2.1](PMX2.0.md)
+
 # VMD file format
 
 > http://mikumikudance.wikia.com/wiki/VMD_file_format
