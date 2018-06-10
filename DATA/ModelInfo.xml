@@ -1,6 +1,4 @@
-<m2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<m2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <info>
     <modelname>Character\Bloodelf\female\bloodelffemale.m2</modelname>
   </info>

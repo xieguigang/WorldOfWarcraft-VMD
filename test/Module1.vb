@@ -16,8 +16,9 @@ Module Module1
 
     Sub pmxReadertest()
         Dim pmx As PMXFile = PMXReader.Open("../DATA/vdproject.pmx")
-        Dim pmx2 = PMXReader.Open("F:\MikuMikuDanceE_v926x64\小桃初代女仆v1\小桃初代女仆v1\小桃初代女仆v1.pmx")
+        ' Dim pmx2 = PMXReader.Open("F:\MikuMikuDanceE_v926x64\小桃初代女仆v1\小桃初代女仆v1\小桃初代女仆v1.pmx")
 
+        Call pmx.GetXml.SaveTo("./xiv1.xml")
 
         Pause()
     End Sub

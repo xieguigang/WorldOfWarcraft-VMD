@@ -258,17 +258,23 @@ Public Module PMXReader
             Dim name$ = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
             Dim enName$ = pmx.ReadString(BinaryStringFormat.UInt32LengthPrefix, encoding)
             ' argb
-            Dim argb!() = pmx.ReadSingles(4)
-            Dim diffuse As Color = Color.FromArgb(argb(0), argb(1), argb(2), argb(3))
+            Dim diffuse As New Color(pmx.ReadSingles(4))
             ' rgb
-            argb = pmx.ReadSingles(3)
-            Dim specular As Color = Color.FromArgb(argb(0), argb(1), argb(2))
+            Dim specular As New Color(pmx.ReadSingles(3))
             Dim specularity! = pmx.ReadSingle
-            argb = pmx.ReadSingles(3)
-            Dim ambient As Color = Color.FromArgb(argb(0), argb(1), argb(2))
+            Dim ambient As New Color(pmx.ReadSingles(3))
             Dim flag As DrawingModes = pmx.ReadByte
-            argb = pmx.ReadSingles(4)
-            Dim edgeColor As Color = Color.FromArgb(argb(0), argb(1), argb(2), argb(3))
+
+            If flag <> DrawingModes.DoubleSided AndAlso
+                flag <> DrawingModes.DrawEdges AndAlso
+                flag <> DrawingModes.SelfShadow AndAlso
+                flag <> DrawingModes.SelfShadowMap AndAlso
+                flag <> DrawingModes.Shadow Then
+
+                flag = DrawingModes.None
+            End If
+
+            Dim edgeColor As New Color(pmx.ReadSingles(4))
             Dim edgeSize! = pmx.ReadSingle
             Dim texNameIndex = pmx.readIndex(globals.textureIndexSize)
             Dim sphereIndex = pmx.readIndex(globals.textureIndexSize)
