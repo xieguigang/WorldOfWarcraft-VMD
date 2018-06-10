@@ -1,5 +1,6 @@
 ﻿Imports System.Xml.Serialization
 Imports MikuMikuDance.File.PMX.Model.VertexData.DeformTypes
+Imports MikuMikuDance.Math3D
 
 Namespace Model.VertexData
 

@@ -1,5 +1,4 @@
-﻿Imports System.Drawing
-Imports System.Runtime.CompilerServices
+﻿Imports System.Runtime.CompilerServices
 Imports System.Text
 Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 Imports Microsoft.VisualBasic.Data.IO
@@ -11,6 +10,7 @@ Imports MikuMikuDance.File.PMX.Model.Information
 Imports MikuMikuDance.File.PMX.Model.Information.globals
 Imports MikuMikuDance.File.PMX.Model.VertexData
 Imports MikuMikuDance.File.PMX.Model.VertexData.DeformTypes
+Imports MikuMikuDance.Math3D
 
 Public Module PMXReader
 

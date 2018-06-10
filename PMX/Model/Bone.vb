@@ -1,5 +1,6 @@
 ﻿Imports System.Xml.Serialization
 Imports Microsoft.VisualBasic.Serialization.JSON
+Imports MikuMikuDance.Math3D
 
 Namespace Model.BoneData
 
