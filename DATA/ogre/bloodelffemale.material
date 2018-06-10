@@ -1,0 +1,154 @@
+material bloodelffemale_0
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Body.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_2
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Hair00_06.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_8
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Hair00_06.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_20
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Hair00_06.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_33
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Body.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_34
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Body.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_38
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Body.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_46
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Body.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_52
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Body.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_59
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture DEATHKNIGHTEYEGLOW.tga -1
+			}
+		}
+	}
+}
+material bloodelffemale_64
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0.7 0.7
+			texture_unit
+			{
+				texture Cape_PVPAlliance_Leather_B_01Black.tga -1
+			}
+		}
+	}
+}
