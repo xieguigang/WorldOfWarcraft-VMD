@@ -21,10 +21,18 @@ Namespace ogre
         <XmlAttribute>
         Dim angle As Double
         Dim axis As vec3
+
+        Public Overrides Function ToString() As String
+            Return $"rotate {angle}° on axis={axis}"
+        End Function
     End Structure
 
     Public Structure boneparent
         <XmlAttribute> Dim bone As Integer
         <XmlAttribute> Dim parent As Integer
+
+        Public Overrides Function ToString() As String
+            Return $"{parent} -> {bone}"
+        End Function
     End Structure
 End Namespace
