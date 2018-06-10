@@ -8,6 +8,10 @@ Namespace ogre
         <XmlAttribute> Public Property id As Integer
         <XmlAttribute> Public Property name As String
 
+        ''' <summary>
+        ''' 这个骨骼节点的三维空间位置
+        ''' </summary>
+        ''' <returns></returns>
         Public Property position As vec3
         Public Property rotation As rotation
 
