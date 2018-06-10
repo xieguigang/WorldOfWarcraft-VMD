@@ -112,8 +112,9 @@ Public Module WMV2VMDExtensions
                          End Function) _
                 .ToArray
             Dim best = calcOrder.First
+            Dim wowID = bone.name Or CStr(bone.id).AsDefault
 
-            mapping(bone.name Or CStr(bone.id).AsDefault) = best.name
+            mapping(wowID) = best.name
         Next
 
         Return mapping

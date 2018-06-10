@@ -1,4 +1,5 @@
-﻿Imports MikuMikuDance.File
+﻿Imports MikuMikuDance.Extensions.m2
+Imports MikuMikuDance.File
 Imports MikuMikuDance.File.PMX
 Imports MikuMikuDance.File.PMX.Model
 Imports MikuMikuDance.File.VMD
@@ -7,6 +8,8 @@ Imports WorldOfWarcraft.Plugins.WMV
 Module Module1
 
     Sub Main()
+
+        Call matchTest()
         'Call vmdReaderTest()
         ' Call vmdWriteTest()
 
@@ -15,6 +18,14 @@ Module Module1
         Call pmxReadertest()
 
         Call loadWMVtest()
+    End Sub
+
+    Sub matchTest()
+        Dim wow = ogre.skeleton.LoadSkeletonXml("../DATA/ogre/bloodelffemale.skeleton.xml").ResetSkeleton
+        Dim mmd = PMXReader.Open("../DATA/vdproject.pmx").ResetSkeleton
+        Dim mappings = wow.MatchBones(mmd)
+
+        Pause()
     End Sub
 
     Sub testLoadOgre()
