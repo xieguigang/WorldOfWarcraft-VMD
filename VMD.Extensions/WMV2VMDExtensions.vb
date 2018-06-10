@@ -2,6 +2,7 @@
 Imports Microsoft.VisualBasic.ComponentModel.Ranges.Model
 Imports Microsoft.VisualBasic.Math.LinearAlgebra
 Imports MikuMikuDance.File.PMX.Model
+Imports MikuMikuDance.Math3D
 Imports WorldOfWarcraft.Plugins.WMV.ogre
 
 Public Module WMV2VMDExtensions
@@ -20,11 +21,25 @@ Public Module WMV2VMDExtensions
             .Select(Function(b) CDbl(b.position.y)) _
             .ToArray
         Dim offset As Vector = {
-            xrange.Min + xrange.Length / 2,
-            yrange.Min + yrange.Length / 2,
+            xrange.Length / 2,
+            yrange.Length / 2,
             minZ
         }
+        Dim x, y, z As Single
 
+        For Each bone As bone In skeleton.bones
+            x = bone.position.x
+            y = bone.position.y
+            z = bone.position.z
+
+            bone.position = New vec3 With {
+                .x = x - offset(0),
+                .y = y - offset(1),
+                .z = z - offset(2)
+            }
+        Next
+
+        Return skeleton
     End Function
 
     <Extension>
