@@ -10,9 +10,18 @@ Module Module1
         'Call vmdReaderTest()
         ' Call vmdWriteTest()
 
+        Call testLoadOgre()
+
         Call pmxReadertest()
 
         Call loadWMVtest()
+    End Sub
+
+    Sub testLoadOgre()
+        Dim ske = ogre.skeleton.LoadSkeletonXml("../DATA/ogre/bloodelffemale.skeleton.xml")
+
+
+        Pause()
     End Sub
 
     Sub pmxReadertest()
