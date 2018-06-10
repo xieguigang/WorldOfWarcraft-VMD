@@ -125,21 +125,29 @@
       <Project>{35a5d798-2d99-4f5e-b10a-d8e94a2df153}</Project>
       <Name>wow-m2</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MikuMikuDance.Math3D\MikuMikuDance.Math3D.vbproj">
+      <Project>{ddbf8ace-48f3-412c-aa83-a231044ae2cb}</Project>
+      <Name>MikuMikuDance.Math3D</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PMX\PMX.vbproj">
       <Project>{6d0966af-bae1-4ced-8521-c81aae01338d}</Project>
       <Name>PMX</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VMD\VMD.vbproj">
-      <Project>{90379434-c390-440c-ac0c-5e455e6c2675}</Project>
-      <Name>VMD</Name>
-    </ProjectReference>
-    <ProjectReference Include="E:\repo\xDoc\Yilia\runtime\sciBASIC#\Data\BinaryData\BinaryData\BinaryData.vbproj">
+    <ProjectReference Include="..\runtime\sciBASIC\Data\BinaryData\BinaryData\BinaryData.vbproj">
       <Project>{487d7c92-d05a-4908-bf81-e6baba0bf592}</Project>
       <Name>BinaryData</Name>
     </ProjectReference>
-    <ProjectReference Include="E:\repo\xDoc\Yilia\runtime\sciBASIC#\Microsoft.VisualBasic.Core\47-dotnet_Microsoft.VisualBasic.vbproj">
+    <ProjectReference Include="..\runtime\sciBASIC\Data_science\Mathematica\Math\Math\math-core.vbproj">
+      <Project>{e3367b88-5d0c-495a-8273-331656d4b5aa}</Project>
+      <Name>math-core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\runtime\sciBASIC\Microsoft.VisualBasic.Core\47-dotnet_Microsoft.VisualBasic.vbproj">
       <Project>{fecce1fd-e1d4-49e3-a668-60bb5e7aed99}</Project>
       <Name>47-dotnet_Microsoft.VisualBasic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VMD\VMD.vbproj">
+      <Project>{90379434-c390-440c-ac0c-5e455e6c2675}</Project>
+      <Name>VMD</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
