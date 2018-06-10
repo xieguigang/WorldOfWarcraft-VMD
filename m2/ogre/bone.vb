@@ -22,4 +22,9 @@ Namespace ogre
         Dim angle As Double
         Dim axis As vec3
     End Structure
+
+    Public Structure boneparent
+        <XmlAttribute> Dim bone As Integer
+        <XmlAttribute> Dim parent As Integer
+    End Structure
 End Namespace
