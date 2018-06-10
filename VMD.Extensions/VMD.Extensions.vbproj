@@ -121,9 +121,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\m2\m2.vbproj">
+    <ProjectReference Include="..\m2\wow-m2.vbproj">
       <Project>{35a5d798-2d99-4f5e-b10a-d8e94a2df153}</Project>
-      <Name>m2</Name>
+      <Name>wow-m2</Name>
     </ProjectReference>
     <ProjectReference Include="..\PMX\PMX.vbproj">
       <Project>{6d0966af-bae1-4ced-8521-c81aae01338d}</Project>

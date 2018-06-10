@@ -129,6 +129,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MikuMikuDance.Math3D\MikuMikuDance.Math3D.vbproj">
+      <Project>{ddbf8ace-48f3-412c-aa83-a231044ae2cb}</Project>
+      <Name>MikuMikuDance.Math3D</Name>
+    </ProjectReference>
     <ProjectReference Include="E:\repo\xDoc\Yilia\runtime\sciBASIC#\Data\BinaryData\BinaryData\BinaryData.vbproj">
       <Project>{487d7c92-d05a-4908-bf81-e6baba0bf592}</Project>
       <Name>BinaryData</Name>
