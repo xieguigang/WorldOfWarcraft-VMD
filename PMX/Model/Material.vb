@@ -1,14 +1,16 @@
-﻿Imports System.Drawing
+﻿Imports System.Xml.Serialization
 Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 
 Namespace Model
 
     Public Class Material
 
-        Public Property name As String
-        Public Property enUS As String
+        <XmlAttribute> Public Property name As String
+        <XmlAttribute> Public Property enUS As String
+
         Public Property diffuseColor As Color
         Public Property specularColor As Color
+        <XmlAttribute>
         Public Property specularity As Single
         Public Property ambientColor As Color
         Public Property drawingMode As DrawingModes
@@ -17,9 +19,12 @@ Namespace Model
         Public Property textureIndex As NamedValue(Of Integer)
         Public Property sphereIndex As NamedValue(Of Integer)
         Public Property sphereMode As SphereModes
+        <XmlAttribute>
         Public Property toonFlag As Byte
         Public Property toonIndex As NamedValue(Of Integer)
+        <XmlText>
         Public Property memo As String
+        <XmlAttribute>
         Public Property faceCount As Integer
 
         Public Overrides Function ToString() As String

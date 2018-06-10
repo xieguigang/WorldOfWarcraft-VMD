@@ -1,4 +1,6 @@
-﻿Namespace Model
+﻿Imports System.Xml.Serialization
+
+Namespace Model
 
     Public Class Surface
 
@@ -6,6 +8,7 @@
 
     Public Class Face
 
+        <XmlAttribute>
         Public Property size As Integer
         Public Property vertexIndices As Integer()
 

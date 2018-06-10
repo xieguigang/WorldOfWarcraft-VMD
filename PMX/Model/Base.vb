@@ -13,7 +13,7 @@ Namespace Model
 
     Public Structure vec2
 
-        Dim x, y As Single
+        <XmlAttribute> Dim x, y As Single
 
         Public Overrides Function ToString() As String
             Return $"({x}, {y})"
@@ -22,7 +22,7 @@ Namespace Model
 
     Public Structure vec3
 
-        Dim x, y, z As Single
+        <XmlAttribute> Dim x, y, z As Single
 
         Public Shared ReadOnly Property UnitX As New vec3(1, 0, 0)
         Public Shared ReadOnly Property UnitY As New vec3(0, 1, 0)
@@ -44,7 +44,8 @@ Namespace Model
     End Structure
 
     Public Structure vec4
-        Dim x, y, z, w As Single
+
+        <XmlAttribute> Dim x, y, z, w As Single
 
         Public Overrides Function ToString() As String
             Return $"({x}, {y}, {z}, {w})"

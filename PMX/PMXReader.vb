@@ -93,8 +93,9 @@ Public Module PMXReader
         Return New header With {
             .magics = magic,
             .version = version,
-            .count = count,
-            .globals = New globals(globals)
+            .globals = New globals(globals) With {
+                .count = count
+            }
         }
     End Function
 

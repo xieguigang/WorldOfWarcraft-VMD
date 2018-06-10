@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Xml.Serialization
 Imports Microsoft.VisualBasic.Language
 Imports MikuMikuDance.File.PMX.Model.BoneData
 Imports MikuMikuDance.File.PMX.Model.Information
@@ -30,9 +31,9 @@ Namespace Model
             ''' The very first magic bytes at the begining of the pmx file.
             ''' </summary>
             ''' <returns></returns>
-            Public Property magics As Char()
-            Public Property version As Single
-            Public Property count As Byte
+            <XmlAttribute> Public Property magics As Char()
+            <XmlAttribute> Public Property version As Single
+
             ''' <summary>
             ''' 长度为<see cref="count"/>
             ''' </summary>
@@ -62,6 +63,8 @@ Namespace Model
         End Enum
 
         Public Class globals
+
+            <XmlAttribute> Public Property count As Byte
 
             ''' <summary>
             ''' + 0 = UTF-16

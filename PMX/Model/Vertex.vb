@@ -1,4 +1,5 @@
-﻿Imports MikuMikuDance.File.PMX.Model.VertexData.DeformTypes
+﻿Imports System.Xml.Serialization
+Imports MikuMikuDance.File.PMX.Model.VertexData.DeformTypes
 
 Namespace Model.VertexData
 
@@ -35,6 +36,7 @@ Namespace Model.VertexData
 
         Public Structure DeformType
 
+            <XmlAttribute>
             Dim type As WeightDeformTypes
 
             Dim BDEF1 As BDEF1
@@ -52,6 +54,7 @@ Namespace Model.VertexData
 
         Public Class BDEF1
 
+            <XmlAttribute>
             Public Property index1 As Integer
             Public Property weight1 As Single
 
@@ -62,7 +65,7 @@ Namespace Model.VertexData
 
         Public Class BDEF2 : Inherits BDEF1
 
-            Public Property index2 As Integer
+            <XmlAttribute> Public Property index2 As Integer
 
             Public ReadOnly Property weight2 As Single
                 Get
@@ -72,9 +75,9 @@ Namespace Model.VertexData
         End Class
 
         Public Class BDEF4 : Inherits BDEF1
-            Public Property index2 As Integer
-            Public Property index3 As Integer
-            Public Property index4 As Integer
+            <XmlAttribute> Public Property index2 As Integer
+            <XmlAttribute> Public Property index3 As Integer
+            <XmlAttribute> Public Property index4 As Integer
             Public Property weight2 As Single
             Public Property weight3 As Single
             Public Property weight4 As Single

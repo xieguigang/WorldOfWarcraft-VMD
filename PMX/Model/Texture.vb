@@ -5,6 +5,7 @@ Namespace Model
 
     Public Class Texture
 
+        <XmlAttribute>
         Public Property size As Integer
 
         Public Property fileNames As String()

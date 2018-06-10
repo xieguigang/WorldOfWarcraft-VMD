@@ -1,23 +1,25 @@
-﻿Imports Microsoft.VisualBasic.Serialization.JSON
+﻿Imports System.Xml.Serialization
+Imports Microsoft.VisualBasic.Serialization.JSON
 
 Namespace Model.BoneData
 
     Public Class Bone
 
-        Public Property name As String
-        Public Property enUS As String
+        <XmlAttribute> Public Property name As String
+        <XmlAttribute> Public Property enUS As String
+
         Public Property position As vec3
         Public Property boneFlag As BoneFlags
-        Public Property parentIndex As Integer
+        <XmlAttribute> Public Property parentIndex As Integer
         Public Property connectedTo As connectTo
-        Public Property appendParent As Integer
-        Public Property appendRatio As Single
+        <XmlAttribute> Public Property appendParent As Integer
+        <XmlAttribute> Public Property appendRatio As Single
         Public Property axis As vec3
-        Public Property level As Integer
+        <XmlAttribute> Public Property level As Integer
         Public Property localX As vec3
         Public Property localY As vec3
         Public Property localZ As vec3
-        Public Property extKey As Integer
+        <XmlAttribute> Public Property extKey As Integer
         Public Property IK As IK
         Public Property IKtype As IKKinds
 
@@ -28,6 +30,7 @@ Namespace Model.BoneData
     End Class
 
     Public Structure connectTo
+        <XmlAttribute>
         Dim toBoneIndex As Integer
         Dim toOffset As vec3
     End Structure
@@ -41,9 +44,10 @@ Namespace Model.BoneData
 
     Public Structure IK
 
-        Dim target As Integer
-        Dim loops As Integer
-        Dim angle As Single
+        <XmlAttribute> Dim target As Integer
+        <XmlAttribute> Dim loops As Integer
+        <XmlAttribute> Dim angle As Single
+
         Dim linklist As Link()
 
         Public Overrides Function ToString() As String
