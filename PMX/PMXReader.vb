@@ -14,6 +14,8 @@ Imports MikuMikuDance.File.PMX.Model.VertexData.DeformTypes
 
 Public Module PMXReader
 
+    Public Const MMDOfficial$ = "http://www.geocities.jp/higuchuu4/"
+
     ''' <summary>
     ''' MMD之中的日文编码
     ''' </summary>

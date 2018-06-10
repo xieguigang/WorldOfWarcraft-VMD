@@ -1,4 +1,5 @@
-﻿Imports MikuMikuDance.File.PMX
+﻿Imports MikuMikuDance.File
+Imports MikuMikuDance.File.PMX
 Imports MikuMikuDance.File.PMX.Model
 Imports MikuMikuDance.File.VMD
 Imports WorldOfWarcraft
@@ -15,10 +16,10 @@ Module Module1
     End Sub
 
     Sub pmxReadertest()
-        Dim pmx As PMXFile = PMXReader.Open("../DATA/vdproject.pmx")
+        Dim xi As PMXFile = PMXReader.Open("../DATA/vdproject.pmx")
         ' Dim pmx2 = PMXReader.Open("F:\MikuMikuDanceE_v926x64\小桃初代女仆v1\小桃初代女仆v1\小桃初代女仆v1.pmx")
 
-        Call pmx.GetXml.SaveTo("./xiv1.xml")
+        Call New PMX.Xml With {.PMX = xi}.GetXml.SaveTo("./xiv1.xml")
 
         Pause()
     End Sub
@@ -33,9 +34,9 @@ Module Module1
     Sub vmdReaderTest()
 
         Dim path = "C:\Users\Evia\source\repos\VMD\DATA\MOTION.vmd"
-        Dim vmd = Reader.OpenAuto(path)
+        Dim vmdData = Reader.OpenAuto(path)
 
-        Call New Xml With {.VMD = vmd}.GetXml.SaveTo("./test.vmd.xml")
+        Call New VMD.Xml With {.VMD = vmdData}.GetXml.SaveTo("./test.vmd.xml")
 
         Pause()
     End Sub
