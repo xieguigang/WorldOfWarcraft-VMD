@@ -1,5 +1,7 @@
 ﻿Imports System.Runtime.CompilerServices
 Imports Microsoft.VisualBasic.ComponentModel.Ranges.Model
+Imports Microsoft.VisualBasic.Language
+Imports Microsoft.VisualBasic.Math
 Imports Microsoft.VisualBasic.Math.LinearAlgebra
 Imports MikuMikuDance.File.PMX.Model
 Imports MikuMikuDance.Math3D
@@ -77,5 +79,43 @@ Public Module WMV2VMDExtensions
         Next
 
         Return mmd
+    End Function
+
+    ''' <summary>
+    ''' 使用最小欧几里得距离进行骨骼的匹配操作
+    ''' 
+    ''' ``{WOW bone name -> MMD bone name}``
+    ''' </summary>
+    ''' <param name="wow"></param>
+    ''' <param name="mmd"></param>
+    ''' <returns></returns>
+    <Extension>
+    Public Function MatchBones(wow As skeleton, mmd As PMXFile) As Dictionary(Of String, String)
+        Dim mapping As New Dictionary(Of String, String)
+
+        For Each bone As bone In wow.bones
+            Dim query As Vector = {
+                bone.position.x,
+                bone.position.y,
+                bone.position.z
+            }
+            Dim calcOrder = mmd.bones _
+                .data _
+                .OrderBy(Function(b)
+                             Dim target As Vector = {
+                                 b.position.x,
+                                 b.position.y,
+                                 b.position.z
+                             }
+                             Dim dist# = query.EuclideanDistance(target)
+                             Return dist
+                         End Function) _
+                .ToArray
+            Dim best = calcOrder.First
+
+            mapping(bone.name Or CStr(bone.id).AsDefault) = best.name
+        Next
+
+        Return mapping
     End Function
 End Module
