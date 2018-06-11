@@ -23,20 +23,20 @@ Partial Class SkeletonAlignment
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveMappingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -68,21 +68,21 @@ Partial Class SkeletonAlignment
         Me.SplitContainer1.SplitterDistance = 476
         Me.SplitContainer1.TabIndex = 0
         '
-        'Panel1
+        'Button1
         '
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 98)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(476, 571)
-        Me.Panel1.TabIndex = 0
+        Me.Button1.Location = New System.Drawing.Point(382, 30)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(36, 23)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "..."
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'Panel2
+        'TextBox1
         '
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 114)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(525, 555)
-        Me.Panel2.TabIndex = 0
+        Me.TextBox1.Location = New System.Drawing.Point(89, 30)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(287, 20)
+        Me.TextBox1.TabIndex = 2
         '
         'Label1
         '
@@ -93,6 +93,23 @@ Partial Class SkeletonAlignment
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "WOW model:"
         '
+        'Panel1
+        '
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 98)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(476, 571)
+        Me.Panel1.TabIndex = 0
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(390, 30)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(36, 23)
+        Me.Button2.TabIndex = 5
+        Me.Button2.Text = "..."
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -101,6 +118,21 @@ Partial Class SkeletonAlignment
         Me.Label2.Size = New System.Drawing.Size(67, 13)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "MMD model:"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(97, 30)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(287, 20)
+        Me.TextBox2.TabIndex = 4
+        '
+        'Panel2
+        '
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Location = New System.Drawing.Point(0, 114)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(525, 555)
+        Me.Panel2.TabIndex = 0
         '
         'StatusStrip1
         '
@@ -138,51 +170,20 @@ Partial Class SkeletonAlignment
         'SaveMappingToolStripMenuItem
         '
         Me.SaveMappingToolStripMenuItem.Name = "SaveMappingToolStripMenuItem"
-        Me.SaveMappingToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SaveMappingToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.SaveMappingToolStripMenuItem.Text = "Save Mapping"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(89, 30)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(287, 20)
-        Me.TextBox1.TabIndex = 2
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(382, 30)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(36, 23)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "..."
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(390, 30)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(36, 23)
-        Me.Button2.TabIndex = 5
-        Me.Button2.Text = "..."
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(97, 30)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(287, 20)
-        Me.TextBox2.TabIndex = 4
         '
         'SkeletonAlignment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1005, 715)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.StatusStrip1)
