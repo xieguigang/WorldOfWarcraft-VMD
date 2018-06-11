@@ -90,9 +90,9 @@ Public Module WMV2VMDExtensions
     ''' <param name="mmd"></param>
     Private Sub rescale(wow As skeleton, mmd As PMXFile)
         Dim wowBounds As DoubleRange() = {
-            wow.bones.Select(Function(b) CDbl(b.position.x)),
-            wow.bones.Select(Function(b) CDbl(b.position.y)),
-            wow.bones.Select(Function(b) CDbl(b.position.z))
+            wow.bones.Select(Function(b) CDbl(b.position.x)).ToArray,
+            wow.bones.Select(Function(b) CDbl(b.position.y)).ToArray,
+            wow.bones.Select(Function(b) CDbl(b.position.z)).ToArray
         }
         Dim mmdBounds As DoubleRange() = {
             mmd.bones.data.Select(Function(b) CDbl(b.position.x)).ToArray,
