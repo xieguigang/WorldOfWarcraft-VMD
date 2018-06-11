@@ -82,6 +82,43 @@ Public Module WMV2VMDExtensions
     End Function
 
     ''' <summary>
+    ''' 将WOW和MMD模型的骨骼尺寸调整到相同的尺度
+    ''' </summary>
+    ''' <param name="wow"></param>
+    ''' <param name="mmd"></param>
+    Private Sub rescale(wow As skeleton, mmd As PMXFile)
+        Dim wowBounds As DoubleRange() = {
+            wow.bones.Select(Function(b) CDbl(b.position.x)),
+            wow.bones.Select(Function(b) CDbl(b.position.y)),
+            wow.bones.Select(Function(b) CDbl(b.position.z))
+        }
+        Dim mmdBounds As DoubleRange() = {
+            mmd.bones.data.Select(Function(b) CDbl(b.position.x)).ToArray,
+            mmd.bones.data.Select(Function(b) CDbl(b.position.y)).ToArray,
+            mmd.bones.data.Select(Function(b) CDbl(b.position.z)).ToArray
+        }
+        Dim maxScaleX, maxScaleY, maxScaleZ As DoubleRange
+
+        If wowBounds(0).Length > mmdBounds(0).Length Then
+            maxScaleX = wowBounds(0)
+        Else
+            maxScaleX = mmdBounds(0)
+        End If
+        If wowBounds(1).Length > mmdBounds(1).Length Then
+            maxScaleY = wowBounds(1)
+        Else
+            maxScaleY = mmdBounds(1)
+        End If
+        If wowBounds(2).Length > mmdBounds(2).Length Then
+            maxScaleZ = wowBounds(2)
+        Else
+            maxScaleZ = mmdBounds(2)
+        End If
+
+
+    End Sub
+
+    ''' <summary>
     ''' 使用最小欧几里得距离进行骨骼的匹配操作
     ''' 
     ''' ``{WOW bone name -> MMD bone name}``
@@ -92,6 +129,8 @@ Public Module WMV2VMDExtensions
     <Extension>
     Public Function MatchBones(wow As skeleton, mmd As PMXFile) As Dictionary(Of String, String)
         Dim mapping As New Dictionary(Of String, String)
+
+        Call rescale(wow, mmd)
 
         For Each bone As bone In wow.bones
             Dim query As Vector = {
