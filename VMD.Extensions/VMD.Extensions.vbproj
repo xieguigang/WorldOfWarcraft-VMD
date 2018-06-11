@@ -66,6 +66,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -84,6 +86,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SkeletonAlignment.Designer.vb">
+      <DependentUpon>SkeletonAlignment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SkeletonAlignment.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WMV2VMDExtensions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -107,6 +115,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkeletonAlignment.resx">
+      <DependentUpon>SkeletonAlignment.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
