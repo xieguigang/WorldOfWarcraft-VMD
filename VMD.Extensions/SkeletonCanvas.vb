@@ -2,6 +2,7 @@
 Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.Imaging.Drawing3D
+Imports Microsoft.VisualBasic.Imaging.Drawing3D.Device
 Imports Microsoft.VisualBasic.Imaging.Drawing3D.Math3D
 Imports Microsoft.VisualBasic.Parallel.Tasks
 Imports MikuMikuDance.File.PMX.Model
@@ -9,7 +10,7 @@ Imports WorldOfWarcraft.Plugins.WMV.ogre
 
 Public Class SkeletonCanvas
 
-    Dim frameThread As New UpdateThread(10, AddressOf updateAction)
+    Dim frameThread As New UpdateThread(30, AddressOf updateAction)
     Dim _camera As New Camera With {
         .angleX = 0,
         .angleY = 0,
@@ -27,29 +28,32 @@ Public Class SkeletonCanvas
         .DashStyle = DashStyle.Dash,
         .EndCap = LineCap.ArrowAnchor
     }
+    Dim mouse As Mouse
 
     Public Property NodeRadius As Single = 10
 
     Private Sub updateAction()
         Static oldCamera As New Camera
 
-        If oldCamera.angleX <> _camera.angleX OrElse
-           oldCamera.angleY <> _camera.angleY OrElse
-           oldCamera.angleZ <> _camera.angleZ OrElse
-           oldCamera.fov <> _camera.fov OrElse
-           oldCamera.ViewDistance <> _camera.ViewDistance Then
+        'If oldCamera.angleX <> _camera.angleX OrElse
+        '   oldCamera.angleY <> _camera.angleY OrElse
+        '   oldCamera.angleZ <> _camera.angleZ OrElse
+        '   oldCamera.fov <> _camera.fov OrElse
+        '   oldCamera.ViewDistance <> _camera.ViewDistance Then
 
-            oldCamera.angleX = _camera.angleX
-            oldCamera.angleY = _camera.angleY
-            oldCamera.angleZ = _camera.angleZ
-            oldCamera.fov = _camera.fov
-            oldCamera.ViewDistance = _camera.ViewDistance
+        '    oldCamera.angleX = _camera.angleX
+        '    oldCamera.angleY = _camera.angleY
+        '    oldCamera.angleZ = _camera.angleZ
+        '    oldCamera.fov = _camera.fov
+        '    oldCamera.ViewDistance = _camera.ViewDistance
 
-            Call Me.Invalidate()
-        End If
+        Call Me.Invalidate()
+        'End If
     End Sub
 
     Private Sub SkeletonCanvas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        mouse = New Mouse(Me, _camera)
+
         Call frameThread.Start()
     End Sub
 
@@ -110,5 +114,10 @@ Public Class SkeletonCanvas
 
             Call g.DrawLine(skeletonLine, b, a)
         Next
+    End Sub
+
+    Private Sub SkeletonCanvas_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
+        _camera.ViewDistance += Math.Sign(e.Delta) * 2
+        Console.WriteLine(_camera.ViewDistance)
     End Sub
 End Class

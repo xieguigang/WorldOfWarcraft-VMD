@@ -28,6 +28,9 @@ Partial Class SkeletonCanvas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Cursor = System.Windows.Forms.Cursors.Cross
+        Me.DoubleBuffered = True
         Me.Name = "SkeletonCanvas"
         Me.Size = New System.Drawing.Size(614, 650)
         Me.ResumeLayout(False)
