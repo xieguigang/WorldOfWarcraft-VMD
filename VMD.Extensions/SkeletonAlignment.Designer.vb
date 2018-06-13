@@ -74,7 +74,7 @@ Partial Class SkeletonAlignment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Location = New System.Drawing.Point(12, 88)
-        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Name = "WOW 3D model"
         Me.Panel1.NodeRadius = 10.0!
         Me.Panel1.Size = New System.Drawing.Size(450, 567)
         Me.Panel1.TabIndex = 4
@@ -110,7 +110,7 @@ Partial Class SkeletonAlignment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.Location = New System.Drawing.Point(13, 75)
-        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Name = "MikuMikuDance 3D model"
         Me.Panel2.NodeRadius = 10.0!
         Me.Panel2.Size = New System.Drawing.Size(500, 580)
         Me.Panel2.TabIndex = 6

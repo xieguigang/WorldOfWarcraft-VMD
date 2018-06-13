@@ -4,13 +4,14 @@ Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.Imaging.Drawing3D
 Imports Microsoft.VisualBasic.Imaging.Drawing3D.Device
 Imports Microsoft.VisualBasic.Imaging.Drawing3D.Math3D
+Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Parallel.Tasks
 Imports MikuMikuDance.File.PMX.Model
 Imports WorldOfWarcraft.Plugins.WMV.ogre
 
 Public Class SkeletonCanvas
 
-    Dim frameThread As New UpdateThread(30, AddressOf updateAction)
+    Dim frameThread As New UpdateThread(300, AddressOf updateAction)
     Dim _camera As New Camera With {
         .angleX = 0,
         .angleY = 0,
@@ -47,6 +48,8 @@ Public Class SkeletonCanvas
         '    oldCamera.fov = _camera.fov
         '    oldCamera.ViewDistance = _camera.ViewDistance
 
+        ' Call $"skeleton of {Name} is nothing? {skeleton Is Nothing}".__DEBUG_ECHO
+
         Call Me.Invalidate()
         'End If
     End Sub
@@ -54,6 +57,10 @@ Public Class SkeletonCanvas
     Private Sub SkeletonCanvas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mouse = New Mouse(Me, _camera)
 
+        Call frameThread.Start()
+    End Sub
+
+    Public Sub Run()
         Call frameThread.Start()
     End Sub
 
@@ -65,7 +72,7 @@ Public Class SkeletonCanvas
     End Sub
 
     Public Overloads Sub LoadModel(mmd As PMXFile)
-        skeleton = mmd.AsOgre
+        Call LoadModel(mmd.AsOgre)
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -108,7 +115,7 @@ Public Class SkeletonCanvas
         Next
 
         ' 绘制骨骼连线
-        For Each link In skeleton.bonehierarchy
+        For Each link In skeleton.bonehierarchy.SafeQuery
             Dim a = point2D(link.bone)
             Dim b = point2D(link.parent)
 
