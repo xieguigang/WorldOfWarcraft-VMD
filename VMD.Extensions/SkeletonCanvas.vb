@@ -92,7 +92,7 @@ Public Class SkeletonCanvas
             .RotateX(_camera.angleX) _
             .RotateY(_camera.angleY) _
             .RotateZ(_camera.angleZ) _
-            .Project(Width, Height, _camera.fov, _camera.ViewDistance) _
+            .Project(Width, Height, _camera.fov, _camera.ViewDistance, _camera.offset) _
             .ToArray
 
         ' 进行绘制顺序的计算
