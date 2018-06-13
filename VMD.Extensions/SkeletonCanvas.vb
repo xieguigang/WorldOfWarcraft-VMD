@@ -57,7 +57,7 @@ Public Class SkeletonCanvas
     Private Sub SkeletonCanvas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mouse = New Mouse(Me, _camera)
 
-        Call frameThread.Start()
+        ' Call frameThread.Start()
     End Sub
 
     Public Sub Run()
