@@ -8,7 +8,7 @@ Public Class SkeletonAlignment
             .Filter = "WoW Skeleton Xml(*.xml)|*.Xml"
         }
             If Xml.ShowDialog = DialogResult.OK Then
-                Panel1.LoadModel(Xml.FileName.LoadXml(Of skeleton))
+                Panel1.LoadModel(skeleton.LoadSkeletonXml(Xml.FileName))
             End If
         End Using
     End Sub
