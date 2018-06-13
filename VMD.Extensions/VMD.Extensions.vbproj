@@ -86,11 +86,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.vb" />
     <Compile Include="SkeletonAlignment.Designer.vb">
       <DependentUpon>SkeletonAlignment.vb</DependentUpon>
     </Compile>
     <Compile Include="SkeletonAlignment.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkeletonCanvas.Designer.vb">
+      <DependentUpon>SkeletonCanvas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SkeletonCanvas.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WMV2VMDExtensions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -118,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SkeletonAlignment.resx">
       <DependentUpon>SkeletonAlignment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkeletonCanvas.resx">
+      <DependentUpon>SkeletonCanvas.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +178,9 @@
       <Project>{90379434-c390-440c-ac0c-5e455e6c2675}</Project>
       <Name>VMD</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
