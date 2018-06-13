@@ -25,12 +25,12 @@ Public Class SkeletonCanvas
     ''' </summary>
     Dim skeleton As skeleton
     Dim skeletonLine As New Pen(Drawing.Color.Black, 5) With {
-        .DashStyle = DashStyle.Dash,
+        .DashStyle = DashStyle.Solid,
         .EndCap = LineCap.ArrowAnchor
     }
     Dim mouse As Mouse
 
-    Public Property NodeRadius As Single = 10
+    Public Property NodeRadius As Single = 5
 
     Private Sub updateAction()
         Static oldCamera As New Camera
@@ -114,10 +114,22 @@ Public Class SkeletonCanvas
 
             Call g.DrawLine(skeletonLine, b, a)
         Next
+
+        ' 为了防止被节点和线给覆盖掉
+        ' 标签在最后进行绘制
+        For Each i As Integer In zOrder
+            g.DrawString(skeleton.bones(i).name, Font, Brushes.White, point2D(i))
+        Next
     End Sub
 
     Private Sub SkeletonCanvas_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
-        _camera.ViewDistance += Math.Sign(e.Delta) * 2
+        _camera.ViewDistance += Math.Sign(e.Delta) / 4
         Console.WriteLine(_camera.ViewDistance)
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        _camera.angleX = 0
+        _camera.angleY = 0
+        _camera.angleZ = 0
     End Sub
 End Class
