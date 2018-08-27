@@ -4,8 +4,9 @@ Module Module1
 
     Sub Main()
 
-        Dim wav = "X:\w.wav".OpenBinaryReader
+        Dim wav = "X:\22222.wav".OpenBinaryReader
         Dim header As wave = wave.ParseHeader(wav)
+
 
 
         Pause()
@@ -63,6 +64,12 @@ Public Class DataSubChunk : Inherits SubChunk
     Public Property Data As Integer()
 
     Public Shared Function ParseData(wav As BinaryDataReader) As DataSubChunk
+        Do While wav.ReadString(4) <> "data"
+            wav.Seek(-3, IO.SeekOrigin.Current)
+        Loop
+
+        wav.Seek(-4, IO.SeekOrigin.Current)
+
         Return New DataSubChunk With {
             .ChunkID = wav.ReadString(4),
             .ChunkSize = wav.ReadInt32,
@@ -71,6 +78,8 @@ Public Class DataSubChunk : Inherits SubChunk
     End Function
 
     Private Shared Iterator Function loadData(wav As BinaryDataReader) As IEnumerable(Of Integer)
-
+        Do While Not wav.EndOfStream
+            Yield wav.ReadInt32
+        Loop
     End Function
 End Class
