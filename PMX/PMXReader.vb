@@ -12,6 +12,9 @@ Imports MikuMikuDance.File.PMX.Model.VertexData
 Imports MikuMikuDance.File.PMX.Model.VertexData.DeformTypes
 Imports MikuMikuDance.Math3D
 
+''' <summary>
+''' The MMD pmx model file reader module.
+''' </summary>
 Public Module PMXReader
 
     Public Const MMDOfficial$ = "http://www.geocities.jp/higuchuu4/"
@@ -21,6 +24,11 @@ Public Module PMXReader
     ''' </summary>
     ReadOnly Shift_JIS932 As Encoding = System.Text.Encoding.GetEncoding("shift_jis")
 
+    ''' <summary>
+    ''' Open a given MMD ``*.pmx`` 3D model file
+    ''' </summary>
+    ''' <param name="pmx"></param>
+    ''' <returns></returns>
     Public Function Open(pmx As String) As PMXFile
         Using file As BinaryDataReader = pmx.OpenBinaryReader
             Dim header As header = file.readHeader
@@ -61,10 +69,12 @@ Public Module PMXReader
     Const byte1 As Byte = 1
 
     ''' <summary>
-    ''' 
+    ''' Read the mmd model information after parsing headers
     ''' </summary>
     ''' <param name="pmx"></param>
     ''' <param name="encodingByte">
+    ''' Character encoding page value from Globals settings
+    ''' 
     ''' + 0 = UTF-16
     ''' + 1 = UTF-8
     ''' </param>
@@ -85,11 +95,18 @@ Public Module PMXReader
         }
     End Function
 
+    ''' <summary>
+    ''' Parse the pmx file header
+    ''' </summary>
+    ''' <param name="pmx"></param>
+    ''' <returns></returns>
     <Extension>
     Private Function readHeader(pmx As BinaryDataReader) As header
         Dim magic$ = pmx.ReadString(4)
         Dim version = pmx.ReadSingle
         Dim count = pmx.ReadByte
+
+        ' The pmx model file global settings for the file parser
         Dim globals As Byte() = pmx.ReadBytes(count)
 
         Return New header With {
@@ -103,6 +120,14 @@ Public Module PMXReader
 
 #Region "Model Data"
 
+    ''' <summary>
+    ''' Read the mmd 3m model character bones data, The ``*.vmd`` motion data is binding on 
+    ''' the bone by match bone names.
+    ''' </summary>
+    ''' <param name="pmx"></param>
+    ''' <param name="n%">How many bones that defined in this pmx model file.</param>
+    ''' <param name="globals">Parser global settings</param>
+    ''' <returns></returns>
     <Extension>
     Private Iterator Function readBones(pmx As BinaryDataReader, n%, globals As globals) As IEnumerable(Of Bone)
         Dim encoding As Encoding = Encoding.Unicode Or UTF8.When(globals.encoding = byte1)
@@ -248,6 +273,12 @@ Public Module PMXReader
         Next
     End Function
 
+    ''' <summary>
+    ''' Check a specific flag is exists in a given flag values or not?
+    ''' </summary>
+    ''' <param name="flags"></param>
+    ''' <param name="check"></param>
+    ''' <returns></returns>
     <Extension>
     Public Function CheckFlag(flags As BoneFlags, check As BoneFlags) As Boolean
         Return (check And flags) = check
@@ -343,6 +374,12 @@ Public Module PMXReader
         }
     End Function
 
+    ''' <summary>
+    ''' 3D surface data
+    ''' </summary>
+    ''' <param name="pmx"></param>
+    ''' <param name="globals"></param>
+    ''' <returns></returns>
     <Extension>
     Private Function readFaceVertex(pmx As BinaryDataReader, globals As globals) As Face
         Dim numbers% = pmx.ReadInt32

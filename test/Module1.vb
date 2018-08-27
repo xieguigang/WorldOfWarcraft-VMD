@@ -21,9 +21,11 @@ Module Module1
     End Sub
 
     Sub matchTest()
-        Dim wow = ogre.skeleton.LoadSkeletonXml("../DATA/ogre/bloodelffemale.skeleton.xml").ResetSkeleton
-        Dim mmd = PMXReader.Open("../DATA/vdproject.pmx").ResetSkeleton
-        Dim mappings = wow.MatchBones(mmd)
+        '  Dim wow = ogre.skeleton.LoadSkeletonXml("../DATA/ogre/bloodelffemale.skeleton.xml") '.ResetSkeleton
+        '  Dim mmd = PMXReader.Open("../DATA/vdproject.pmx") '.ResetSkeleton
+        '  Dim mappings = wow.MatchBones(mmd)
+
+        Call New SkeletonAlignment().ShowDialog()
 
         Pause()
     End Sub
