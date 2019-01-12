@@ -9,6 +9,8 @@ Module Module1
 
     Sub Main()
 
+        Call vmdReaderTest()
+
         Call matchTest()
         'Call vmdReaderTest()
         ' Call vmdWriteTest()
@@ -55,7 +57,7 @@ Module Module1
 
     Sub vmdReaderTest()
 
-        Dim path = "C:\Users\Evia\source\repos\VMD\DATA\MOTION.vmd"
+        Dim path = "../DATA/MOTION.vmd"
         Dim vmdData = Reader.OpenAuto(path)
 
         Call New VMD.Xml With {.VMD = vmdData}.GetXml.SaveTo("./test.vmd.xml")
