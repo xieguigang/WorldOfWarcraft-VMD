@@ -61,6 +61,7 @@ Module Module1
         Dim vmdData = Reader.OpenAuto(path)
 
         Call New VMD.Xml With {.VMD = vmdData}.GetXml.SaveTo("./test.vmd.xml")
+        Call (vmdData.GetAllBoneNames.AsList + vmdData.GetAllFaceNames).OrderByDescending(Function(n) n.Length).ToArray.SaveTo("./names.txt")
 
         Pause()
     End Sub

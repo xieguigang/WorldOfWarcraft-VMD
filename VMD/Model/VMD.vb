@@ -84,5 +84,13 @@ Namespace Model
             Return modelName
         End Function
 
+        Public Function GetAllBoneNames() As String()
+            Return boneList.keyframes.Select(Function(b) b.boneName).Distinct.ToArray
+        End Function
+
+        Public Function GetAllFaceNames() As String()
+            Return faceList.keyframes.Select(Function(f) f.faceName).Distinct.ToArray
+        End Function
+
     End Class
 End Namespace
